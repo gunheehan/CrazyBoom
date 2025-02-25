@@ -1,14 +1,46 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class JoyStick : MonoBehaviour
 {
-    [SerializeField] private InputActionReference inputActionReference;
+    private PlayerController controller;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        Vector2 joystickPos = inputActionReference.action.ReadValue<Vector2>();
-        Debug.Log(joystickPos);
+        controller = new PlayerController();
+    }
+
+    private void OnEnable()
+    {
+        controller.Player.Move.started += OnStartMove;
+        controller.Player.Move.performed += OnUpdateMove;
+        controller.Player.Move.canceled += OnStopMove;
+        
+        controller.Player.Move.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controller.Player.Move.started -= OnStartMove;
+        controller.Player.Move.performed -= OnUpdateMove;
+        controller.Player.Move.canceled -= OnStopMove;
+        
+        controller.Player.Move.Disable();
+    }
+
+    private void OnStartMove(InputAction.CallbackContext obj)
+    {
+        Vector2 pos = obj.ReadValue<Vector2>();
+    }
+    
+    private void OnUpdateMove(InputAction.CallbackContext obj)
+    {
+        Vector2 pos = obj.ReadValue<Vector2>();
+    }
+    
+    private void OnStopMove(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Stop Move");
     }
 }
