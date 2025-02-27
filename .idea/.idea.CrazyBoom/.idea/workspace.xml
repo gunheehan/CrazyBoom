@@ -7,14 +7,19 @@
     <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/JoyStick.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/JoyStick.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.inputactions.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.inputactions.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="JoyStick" />
+      </map>
+    </option>
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -149,6 +154,6 @@
     <MESSAGE value="base file upload" />
     <MESSAGE value="input system PlayerController 추가" />
     <MESSAGE value="Joystick Event 처리 구성중" />
-    <option name="LAST_COMMIT_MESSAGE" value="Joystick Event 처리 구성중" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
