@@ -61,8 +61,9 @@ public class WaterBomb : MonoBehaviour
                     int secondHitLayer = secondHit.collider.gameObject.layer;
                     if (((1 << secondHitLayer) & obstacleLayer) != 0)
                     {
-                        Debug.Log("플레이어와 충돌: " + secondHit.collider.gameObject.name);
-                        CreateParticleEffect(hit.point + direction.normalized * (secondHit.distance - 0.1f));
+                        IObstacle obstacle = secondHit.collider.gameObject.GetComponent<IObstacle>();
+                        obstacle.Damage();
+                        CreateParticleEffect(secondHit.point + direction.normalized * (secondHit.distance - 0.1f));
                     }
                 }
                 else
@@ -72,6 +73,8 @@ public class WaterBomb : MonoBehaviour
             }
             else if (((1 << hitLayer) & obstacleLayer) != 0)
             {
+                IObstacle obstacle = hit.collider.gameObject.GetComponent<IObstacle>();
+                obstacle.Damage();
                 CreateParticleEffect(hit.point + direction.normalized * (hit.distance - 0.1f));
             }
         }
