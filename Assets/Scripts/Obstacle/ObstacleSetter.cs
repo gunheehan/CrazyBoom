@@ -20,7 +20,7 @@ public class ObstacleSetter : MonoBehaviour
         {
             for (int z = 0; z < MAPSIZE; z++)
             {
-                Vector3 position = startPosition + new Vector3(x, 0, z);
+                Vector3 position = startPosition + new Vector3(x, 1, z);
                 SetObstacleBox(position);
             }
         } 
@@ -29,7 +29,7 @@ public class ObstacleSetter : MonoBehaviour
     private void SetObstacleBox(Vector3 position)
     {
         GameObject obstacleObject = Instantiate(floorPrefab, floorContents.transform);
-        obstacleObject.transform.position = position;
+        obstacleObject.transform.position = position + new Vector3(position.x, 0, position.z);
 
         obstacleObject.name = "ObstacleBox " + position.x + " / " + position.z;
 
