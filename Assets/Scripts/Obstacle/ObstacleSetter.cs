@@ -34,7 +34,6 @@ public class ObstacleSetter : MonoBehaviour
         {
             int nx = x + offset.x;
             int ny = y + offset.y;
-            Debug.Log(nx + "/" + ny);
             if (IsValidPosition(nx, ny))
                 ignorefloorpos.Add(new Vector2Int(nx, ny));
         }
