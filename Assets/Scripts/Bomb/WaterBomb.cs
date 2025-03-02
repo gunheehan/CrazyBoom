@@ -1,13 +1,13 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterBomb : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> obj;
+    public event Action<WaterBomb> OnExplosionEvent = null;
     private int objIndex;
     
-    private int explosionRange;
+    private int explosionRange = 3;
     private LayerMask obstacleLayer;
     private LayerMask playerLayer;
     
@@ -17,14 +17,9 @@ public class WaterBomb : MonoBehaviour
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
     }
 
-    private void OnEnable()
+    public void SetBomb()
     {
-        SetBomb(3);
-    }
-
-    public void SetBomb(int bombLength)
-    {
-        explosionRange = bombLength;
+        gameObject.SetActive(true);
         StartCoroutine(Explode());
     }
 
@@ -39,9 +34,11 @@ public class WaterBomb : MonoBehaviour
         CheckDirection(Vector3.left, origin);
         CheckDirection(Vector3.forward, origin);
         CheckDirection(Vector3.back, origin);
+        
+        OnExplosionEvent?.Invoke(this);
     }
 
-    void CheckDirection(Vector3 direction, Vector3 origin)
+    private void CheckDirection(Vector3 direction, Vector3 origin)
     {
         RaycastHit hit;
 
@@ -84,9 +81,9 @@ public class WaterBomb : MonoBehaviour
         }
     }
 
-    void CreateParticleEffect(Vector3 position)
+    private void CreateParticleEffect(Vector3 position)
     {
-        obj[objIndex].transform.position = new Vector3(position.x, gameObject.transform.position.y, position.z);
-        objIndex++;
+        // obj[objIndex].transform.position = new Vector3(position.x, gameObject.transform.position.y, position.z);
+        // objIndex++;
     }
 }
