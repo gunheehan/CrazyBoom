@@ -1,6 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class BombController : MonoBehaviour
@@ -9,8 +10,6 @@ public class BombController : MonoBehaviour
     [SerializeField] private Button BombButton;
     [SerializeField] private GameObject player;
     
-    private PlayerController controller;
-
     private Stack<WaterBomb> bombStack;
     private int power = 1;
     
@@ -18,20 +17,6 @@ public class BombController : MonoBehaviour
     {
         bombStack = new Stack<WaterBomb>();
         BombButton.onClick.AddListener(OnClickBomb);
-    }
-
-    private void OnEnable()
-    {
-        if (controller == null)
-            controller = new PlayerController();
-        controller.Player.Attack.performed += context => OnClickBomb();
-        controller.Player.Attack.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controller.Player.Attack.performed -= context => OnClickBomb();
-        controller.Player.Attack.Disable();
     }
 
     private void OnDestroy()
@@ -49,9 +34,11 @@ public class BombController : MonoBehaviour
 
     private void OnClickBomb()
     {
-        WaterBomb bomb = GetBomb();
-        bomb.gameObject.transform.position = player.transform.position;
-        bomb.SetBomb(power);
+        // WaterBomb bomb = GetBomb();
+        // bomb.gameObject.transform.position = player.transform.position;
+        // bomb.SetBomb(power);
+
+        InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Space));
     }
 
     private WaterBomb GetBomb()
