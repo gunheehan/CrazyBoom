@@ -2,22 +2,22 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum PlayerItemType
+public enum BuffItemType
 {
     None,
     Speed,
     Power
 }
-public class PlayerBuffItem : MonoBehaviour
+public class BuffItem : MonoBehaviour
 {
-    private PlayerItemType itemType;
+    private BuffItemType itemType;
     public void SetBuffItem(Vector3 position)
     {
         gameObject.transform.position = position;
         
-        int typeIndex = Random.Range(0, (int)PlayerItemType.Power);
+        int typeIndex = Random.Range(0, (int)BuffItemType.Power);
 
-        itemType = (PlayerItemType)typeIndex;
+        itemType = (BuffItemType)typeIndex;
         
         gameObject.SetActive(true);
     }

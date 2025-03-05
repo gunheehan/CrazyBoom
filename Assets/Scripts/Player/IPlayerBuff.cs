@@ -2,6 +2,6 @@ using UnityEngine;
 
 public interface IPlayerBuff
 {
-    void OnBuff(PlayerItemType buffType);
-    void OnDeBuff(PlayerItemType buffType);
+    void OnBuff(BuffItemType buffType);
+    void OnDeBuff(BuffItemType buffType);
 }
