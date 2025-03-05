@@ -6,7 +6,12 @@ public class PlayerMove : MonoBehaviour
 
     private bool isMove = false;
     private Vector3 direction = Vector3.zero;
-    private float speed = 2f;
+    private float speed = 3f;
+
+    public void OnUpdateSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 
     private void OnEnable()
     {
