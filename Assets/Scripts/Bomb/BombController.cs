@@ -12,6 +12,7 @@ public class BombController : MonoBehaviour
     private PlayerController controller;
 
     private Stack<WaterBomb> bombStack;
+    private int power = 1;
     
     private void Start()
     {
@@ -41,11 +42,16 @@ public class BombController : MonoBehaviour
         }
     }
 
+    public void OnUpdatePower(int newPower)
+    {
+        power = newPower;
+    }
+
     private void OnClickBomb()
     {
         WaterBomb bomb = GetBomb();
         bomb.gameObject.transform.position = player.transform.position;
-        bomb.SetBomb();
+        bomb.SetBomb(power);
     }
 
     private WaterBomb GetBomb()

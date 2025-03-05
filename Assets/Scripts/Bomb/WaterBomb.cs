@@ -7,7 +7,7 @@ public class WaterBomb : MonoBehaviour
     public event Action<WaterBomb> OnExplosionEvent = null;
     private int objIndex;
     
-    private int explosionRange = 3;
+    private int explosionRange = 1;
     private LayerMask obstacleLayer;
     private LayerMask playerLayer;
     
@@ -17,9 +17,10 @@ public class WaterBomb : MonoBehaviour
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
     }
 
-    public void SetBomb()
+    public void SetBomb(int power)
     {
         gameObject.SetActive(true);
+        explosionRange = power;
         StartCoroutine(Explode());
     }
 
