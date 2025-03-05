@@ -2,19 +2,17 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JoyStick : MonoBehaviour
+public class JoyStick
 {
     public event Action<Vector2> UpdateMove; 
     
     private PlayerController controller;
 
-    private void Awake()
+    public void SubscriveEvent()
     {
-        controller = new PlayerController();
-    }
-
-    private void OnEnable()
-    {
+        if (controller == null)
+            controller = new PlayerController();
+        
         controller.Player.Move.started += OnStartMove;
         controller.Player.Move.performed += OnUpdateMove;
         controller.Player.Move.canceled += OnStopMove;
@@ -22,7 +20,7 @@ public class JoyStick : MonoBehaviour
         controller.Player.Move.Enable();
     }
 
-    private void OnDisable()
+    public void DeSubscriveEvent()
     {
         controller.Player.Move.started -= OnStartMove;
         controller.Player.Move.performed -= OnUpdateMove;

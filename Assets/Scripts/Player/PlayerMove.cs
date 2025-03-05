@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private JoyStick joystick;
+    private JoyStick joystick;
 
     private bool isMove = false;
     private Vector3 direction = Vector3.zero;
     private float speed = 3f;
+
+    private void Awake()
+    {
+        joystick = new JoyStick();
+    }
 
     public void OnUpdateSpeed(float newSpeed)
     {
@@ -15,11 +20,13 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
+        joystick.SubscriveEvent();
         joystick.UpdateMove += OnUpdatePlayerDirection;
     }
 
     private void OnDisable()
     {
+        joystick.DeSubscriveEvent();
         joystick.UpdateMove -= OnUpdatePlayerDirection;
     }
 
