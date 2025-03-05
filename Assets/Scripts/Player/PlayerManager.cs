@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -16,20 +14,14 @@ public class PlayerManager : MonoBehaviour
         controller = new PlayerController();
         move.OnUpdateSpeed(stat.GetPlayerSpeed);
         bomb.OnUpdatePower(stat.GetPlayerPower);
-
-    }
-
-    private void OnUpdateAttack(InputAction.CallbackContext obj)
-    {
-        Debug.Log("OnUpdate Attack Key");
     }
 
     private void OnEnable()
     {
         stat.OnUpdatePlayerStat += info => move.OnUpdateSpeed(info.speed);
         stat.OnUpdatePlayerStat += info => bomb.OnUpdatePower(info.power);
-        
-        controller.Player.Attack.performed += OnUpdateAttack;
+
+        controller.Player.Attack.performed += obj => bomb.SetBomb(transform.position);
         controller.Player.Attack.Enable();
     }
 
@@ -37,5 +29,8 @@ public class PlayerManager : MonoBehaviour
     {
         stat.OnUpdatePlayerStat -= info => move.OnUpdateSpeed(info.speed); 
         stat.OnUpdatePlayerStat -= info => bomb.OnUpdatePower(info.power);
+        
+        controller.Player.Attack.performed -= obj => bomb.SetBomb(transform.position);
+        controller.Player.Attack.Disable();
     }
 }
