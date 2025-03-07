@@ -4,7 +4,6 @@ public class ObstacleBox : MonoBehaviour, IObstacle
 {
     private int boxHP;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         boxHP = Random.Range(1, 3);

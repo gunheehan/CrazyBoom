@@ -3,15 +3,11 @@ using UnityEngine;
 public class PlaneParts : MonoBehaviour
 {
     [SerializeField] private ObstacleBox obstacleItem;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void SetPlane(Vector3 position, bool isneedObstacle)
     {
-        
+        gameObject.transform.position = position;
+        if(isneedObstacle)
+            obstacleItem.gameObject.SetActive(true);
     }
 }
