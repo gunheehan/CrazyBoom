@@ -3,16 +3,16 @@ using UnityEngine;
 public class ObstacleBox : MonoBehaviour, IObstacle
 {
     private int boxHP;
-    
-    void Start()
+
+    public void SetObstacleBox()
     {
         boxHP = Random.Range(1, 3);
+        gameObject.SetActive(true);
     }
 
     public void Damage()
     {
         boxHP--;
-        Debug.Log("Box HP : " + boxHP);
         if(boxHP < 1)
             gameObject.SetActive(false);
     }
