@@ -10,67 +10,83 @@ public class WaterBomb : MonoBehaviour
     private int explosionRange = 1;
     private LayerMask obstacleLayer;
     private LayerMask playerLayer;
+    private LayerMask bomb;
+
+    private bool isSet = false;
+    private bool explode = false;
     
     private void Start()
     {
         playerLayer = LayerMask.GetMask("Player", "OtherPlayer");
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
+        bomb = LayerMask.GetMask("Bomb"); 
     }
 
     public void SetBomb(int power)
     {
+        if (isSet)
+            return;
+
+        isSet = false;
         gameObject.SetActive(true);
         explosionRange = power;
-        StartCoroutine(Explode());
+        StartCoroutine(WaitExplode());
     }
 
-    IEnumerator Explode()
+    public void Explode()
+    {
+        if (explode)
+            return;
+
+        explode = true;
+        StopAllCoroutines();
+        
+        Vector3 origin = transform.position;
+        CheckDirection(Vector3.right, origin, explosionRange);
+        CheckDirection(Vector3.left, origin, explosionRange);
+        CheckDirection(Vector3.forward, origin, explosionRange);
+        CheckDirection(Vector3.back, origin, explosionRange);
+        
+        OnExplosionEvent?.Invoke(this);
+        isSet = false;
+    }
+
+    IEnumerator WaitExplode()
     {
         Debug.Log("Bomb 대기");
         objIndex = 0;
         yield return new WaitForSeconds(2f);
-        
-        Vector3 origin = transform.position;
-        CheckDirection(Vector3.right, origin);
-        CheckDirection(Vector3.left, origin);
-        CheckDirection(Vector3.forward, origin);
-        CheckDirection(Vector3.back, origin);
-        
-        OnExplosionEvent?.Invoke(this);
+
+        Explode();
     }
 
-    private void CheckDirection(Vector3 direction, Vector3 origin)
+    private void CheckDirection(Vector3 direction, Vector3 origin, float remainingDistance)
     {
+        if (remainingDistance <= 0) return;
+
         RaycastHit hit;
+        int layerMask = playerLayer | obstacleLayer | bomb;
 
-        int layerMask = playerLayer | obstacleLayer;
-
-        if (Physics.Raycast(origin, direction, out hit, explosionRange, layerMask))
+        if (Physics.Raycast(origin, direction, out hit, remainingDistance, layerMask))
         {
             int hitLayer = hit.collider.gameObject.layer;
+            float newRemainingDistance = remainingDistance - hit.distance;
 
-            if (((1 << hitLayer) & playerLayer) != 0)
+            if (((1 << hitLayer) & bomb) != 0)
             {
-                float remainingDistance = explosionRange - hit.distance;
-
-                RaycastHit secondHit;
-                if (Physics.Raycast(hit.point + direction.normalized * 0.1f, direction, out secondHit, remainingDistance, obstacleLayer))
-                {
-                    int secondHitLayer = secondHit.collider.gameObject.layer;
-                    if (((1 << secondHitLayer) & obstacleLayer) != 0)
-                    {
-                        IObstacle obstacle = secondHit.collider.gameObject.GetComponent<IObstacle>();
-                        obstacle.Damage();
-                        CreateParticleEffect(secondHit.point + direction.normalized * (secondHit.distance - 0.1f));
-                    }
-                }
-                else
-                {
-                    CreateParticleEffect(hit.point + direction.normalized * (hit.distance - 0.1f));
-                }
+                // 💣 bomb 감지 시 폭발 로직 실행 후 남은 거리만큼 다시 검사
+                WaterBomb bomb = hit.collider.gameObject.GetComponent<WaterBomb>();
+                bomb.Explode();
+                CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
+            }
+            else if (((1 << hitLayer) & playerLayer) != 0)
+            {
+                // 👤 player 감지 시 남은 거리만큼 다시 검사
+                CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
             }
             else if (((1 << hitLayer) & obstacleLayer) != 0)
             {
+                // 🛑 obstacle 감지 시 장애물 파괴 후 종료
                 IObstacle obstacle = hit.collider.gameObject.GetComponent<IObstacle>();
                 obstacle.Damage();
                 CreateParticleEffect(hit.point + direction.normalized * (hit.distance - 0.1f));
@@ -78,9 +94,11 @@ public class WaterBomb : MonoBehaviour
         }
         else
         {
-            CreateParticleEffect(origin + direction.normalized * explosionRange);
+            // 충돌이 없으면 최대 거리까지 파티클 효과 생성
+            CreateParticleEffect(origin + direction.normalized * remainingDistance);
         }
     }
+
 
     private void CreateParticleEffect(Vector3 position)
     {
