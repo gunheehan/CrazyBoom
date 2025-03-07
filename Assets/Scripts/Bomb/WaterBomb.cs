@@ -39,7 +39,7 @@ public class WaterBomb : MonoBehaviour
             return;
 
         explode = true;
-        StopAllCoroutines();
+        StopCoroutine(WaitExplode());
         
         Vector3 origin = transform.position;
         CheckDirection(Vector3.right, origin, explosionRange);
@@ -48,16 +48,22 @@ public class WaterBomb : MonoBehaviour
         CheckDirection(Vector3.back, origin, explosionRange);
         
         OnExplosionEvent?.Invoke(this);
-        isSet = false;
+        BombReset();
     }
 
     IEnumerator WaitExplode()
     {
-        Debug.Log("Bomb 대기");
         objIndex = 0;
         yield return new WaitForSeconds(2f);
 
         Explode();
+    }
+
+    private void BombReset()
+    {
+        isSet = false;
+        explode = false;
+        gameObject.SetActive(false);
     }
 
     private void CheckDirection(Vector3 direction, Vector3 origin, float remainingDistance)
@@ -74,19 +80,16 @@ public class WaterBomb : MonoBehaviour
 
             if (((1 << hitLayer) & bomb) != 0)
             {
-                // 💣 bomb 감지 시 폭발 로직 실행 후 남은 거리만큼 다시 검사
                 WaterBomb bomb = hit.collider.gameObject.GetComponent<WaterBomb>();
                 bomb.Explode();
                 CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
             }
             else if (((1 << hitLayer) & playerLayer) != 0)
             {
-                // 👤 player 감지 시 남은 거리만큼 다시 검사
                 CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
             }
             else if (((1 << hitLayer) & obstacleLayer) != 0)
             {
-                // 🛑 obstacle 감지 시 장애물 파괴 후 종료
                 IObstacle obstacle = hit.collider.gameObject.GetComponent<IObstacle>();
                 obstacle.Damage();
                 CreateParticleEffect(hit.point + direction.normalized * (hit.distance - 0.1f));
@@ -94,7 +97,6 @@ public class WaterBomb : MonoBehaviour
         }
         else
         {
-            // 충돌이 없으면 최대 거리까지 파티클 효과 생성
             CreateParticleEffect(origin + direction.normalized * remainingDistance);
         }
     }
