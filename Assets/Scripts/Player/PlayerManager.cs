@@ -33,4 +33,10 @@ public class PlayerManager : MonoBehaviour
         controller.Player.Attack.performed -= obj => bomb.SetBomb(transform.position);
         controller.Player.Attack.Disable();
     }
+
+    public void InitPlayer(Vector3 pos)
+    {
+        gameObject.transform.position = pos;
+        gameObject.SetActive(true);
+    }
 }
