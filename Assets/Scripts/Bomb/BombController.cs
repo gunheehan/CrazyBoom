@@ -45,7 +45,6 @@ public class BombController : MonoBehaviour
 
     private void OnExplosion(WaterBomb bomb)
     {
-        bomb.gameObject.SetActive(false);
         bombStack.Push(bomb);
     }
 }
