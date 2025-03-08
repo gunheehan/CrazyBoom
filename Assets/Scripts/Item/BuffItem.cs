@@ -13,11 +13,10 @@ public class BuffItem : MonoBehaviour
     [SerializeField] private BuffItemType itemType;
     public void SetBuffItem()
     {
-        // int typeIndex = Random.Range(0, 10); // 0부터 9까지의 값 생성
-        // if(typeIndex >= (int)BuffItemType.None)
-        //     return;
+        int typeIndex = Random.Range(0, 10); // 0부터 9까지의 값 생성
+        if(typeIndex >= (int)BuffItemType.None)
+            return;
         
-        int typeIndex = Random.Range(0, 1); // 0부터 9까지의 값 생성
         itemType = (BuffItemType)typeIndex;
         
         gameObject.SetActive(true);
