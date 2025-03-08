@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObstacleBox : MonoBehaviour, IObstacle
 {
+    public event Action OnDestroyBox = null; 
     private int boxHP;
 
     public void SetObstacleBox()
@@ -13,7 +16,10 @@ public class ObstacleBox : MonoBehaviour, IObstacle
     public void Damage()
     {
         boxHP--;
-        if(boxHP < 1)
+        if (boxHP < 1)
+        {
+            OnDestroyBox?.Invoke();
             gameObject.SetActive(false);
+        }
     }
 }
