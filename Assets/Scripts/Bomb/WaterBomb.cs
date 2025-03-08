@@ -5,12 +5,15 @@ using UnityEngine;
 public class WaterBomb : MonoBehaviour
 {
     public event Action<WaterBomb> OnExplosionEvent = null;
+    [SerializeField] private Collider collider;
     private int objIndex;
     
     private int explosionRange = 1;
     private LayerMask obstacleLayer;
     private LayerMask playerLayer;
     private LayerMask bomb;
+
+    private Collider playerCollider;
 
     private bool isSet = false;
     private bool explode = false;
@@ -21,6 +24,21 @@ public class WaterBomb : MonoBehaviour
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
         bomb = LayerMask.GetMask("Bomb"); 
     }
+    
+    private void Update()
+    {
+        if (playerCollider != null && collider != null)
+        {
+            Bounds expandedBounds = collider.bounds;
+            expandedBounds.Expand(1.5f);
+
+            if (!expandedBounds.Contains(playerCollider.bounds.min) || 
+                !expandedBounds.Contains(playerCollider.bounds.max))
+            {
+                collider.isTrigger = false;
+            }
+        }
+    }
 
     public void SetBomb(int power)
     {
@@ -28,6 +46,7 @@ public class WaterBomb : MonoBehaviour
             return;
 
         isSet = false;
+        collider.isTrigger = true;
         gameObject.SetActive(true);
         explosionRange = power;
         StartCoroutine(WaitExplode());
@@ -106,5 +125,13 @@ public class WaterBomb : MonoBehaviour
     {
         // obj[objIndex].transform.position = new Vector3(position.x, gameObject.transform.position.y, position.z);
         // objIndex++;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            playerCollider = other.gameObject.GetComponent<Collider>();
+        }
     }
 }
