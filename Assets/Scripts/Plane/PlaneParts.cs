@@ -1,9 +1,21 @@
+using System;
 using UnityEngine;
 
 public class PlaneParts : MonoBehaviour
 {
     [SerializeField] private ObstacleBox obstacleItem;
     [SerializeField] private WaterBomb bomb;
+    [SerializeField] private BuffItem buffItem;
+
+    private void OnEnable()
+    {
+        obstacleItem.OnDestroyBox += buffItem.SetBuffItem;
+    }
+
+    private void OnDisable()
+    {
+        obstacleItem.OnDestroyBox -= buffItem.SetBuffItem;
+    }
 
     public void SetPlane(Vector3 position, bool isneedObstacle)
     {

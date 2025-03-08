@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour, IPlayerBuff
 {
     [SerializeField] private PlayerMove move;
 
@@ -46,5 +46,15 @@ public class PlayerManager : MonoBehaviour
             PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
             plane?.SetBomb(stat.GetPlayerPower);
         }
+    }
+
+    public void OnBuff(BuffItemType buffType)
+    {
+        stat.OnBuff(buffType);
+    }
+
+    public void OnDeBuff(BuffItemType buffType)
+    {
+        stat.OnDeBuff(buffType);
     }
 }
