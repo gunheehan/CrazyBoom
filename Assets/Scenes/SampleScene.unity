@@ -1210,6 +1210,7 @@ GameObject:
   - component: {fileID: 918300575}
   - component: {fileID: 918300574}
   - component: {fileID: 918300573}
+  - component: {fileID: 918300577}
   m_Layer: 0
   m_Name: BuffItem
   m_TagString: Untagged
@@ -1319,6 +1320,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
+--- !u!111 &918300577
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918300571}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: a4f466e5f7a584163bad11b43b34310a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a4f466e5f7a584163bad11b43b34310a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &962256155
 GameObject:
   m_ObjectHideFlags: 0
