@@ -699,6 +699,7 @@ GameObject:
   - component: {fileID: 498351278}
   - component: {fileID: 498351277}
   - component: {fileID: 498351281}
+  - component: {fileID: 498351282}
   m_Layer: 8
   m_Name: Bomb
   m_TagString: Untagged
@@ -835,6 +836,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!111 &498351282
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498351275}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 670eeceee568848cbb128df9a7d79943, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 670eeceee568848cbb128df9a7d79943, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &716708380
 GameObject:
   m_ObjectHideFlags: 0
