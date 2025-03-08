@@ -42,7 +42,7 @@ public class PlayerStat : IPlayerBuff
         switch (buffType)
         {
             case BuffItemType.Speed:
-                stateInfo.speed += 1.5f;
+                stateInfo.speed += .5f;
                 break;
             case BuffItemType.Power:
                 stateInfo.power += 1;
