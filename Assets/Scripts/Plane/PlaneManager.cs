@@ -8,6 +8,8 @@ public class PlaneManager : MonoBehaviour
     
     [SerializeField] private PlaneParts plane;
     [SerializeField] private GameObject obstacleContents;
+    [SerializeField] private GameObject blockWall;
+    [SerializeField] private GameObject blockWallContents;
 
     private HashSet<Vector2Int> ignorefloorpos;
     private readonly int MAPSIZE = 10;
@@ -85,27 +87,48 @@ public class PlaneManager : MonoBehaviour
                     1,
                     -(z * prefabSizeZ)
                 );
-                
+                PlaneParts obstacleObject = Instantiate(plane, obstacleContents.transform);
+                obstacleObject.transform.SetAsLastSibling();
                 if (ignorefloorpos.Contains(initpos))
-                {
-                    PlaneParts obstacleObject = Instantiate(plane, obstacleContents.transform);
-                    obstacleObject.transform.SetAsLastSibling();
                     obstacleObject.SetPlane(position, false);
-                    continue;
-                }
-
-                SetObstacleBox(position);
+                else
+                    obstacleObject.SetPlane(position, true);
             }
         }
-        
+
+        CreateBoundaryWalls();
         OnCompletedPlaneSetting?.Invoke();
     }
-
-    private void SetObstacleBox(Vector3 position)
+    
+    public void CreateBoundaryWalls()
     {
-        PlaneParts obstacleObject = Instantiate(plane, obstacleContents.transform);
+        Renderer prefabRenderer = plane.GetComponent<Renderer>();
+        float prefabSizeX = prefabRenderer.bounds.size.x;
+        float prefabSizeZ = prefabRenderer.bounds.size.z;
 
-        obstacleObject.transform.SetAsLastSibling();
-        obstacleObject.SetPlane(position, true);
+        for (int x = -1; x <= MAPSIZE; x++) // 바운더리 포함
+        {
+            for (int z = -1; z <= MAPSIZE; z++) // 바운더리 포함
+            {
+                Vector3 position = new Vector3(
+                    (x * prefabSizeX),
+                    2,
+                    -(z * prefabSizeZ)
+                );
+
+                if (x == -1 || x == MAPSIZE || z == -1 || z == MAPSIZE)
+                {
+                    Quaternion rotation = Quaternion.identity;
+
+                    // 행 방향 (위쪽/아래쪽)에 위치한 블록이면 Y축 90도 회전 적용
+                    if (z == -1 || z == MAPSIZE)
+                    {
+                        rotation = Quaternion.Euler(0, 90, 0);
+                    }
+
+                    Instantiate(blockWall, position, rotation, blockWallContents.transform);
+                }
+            }
+        }
     }
 }
