@@ -4,19 +4,20 @@ using Random = UnityEngine.Random;
 
 public enum BuffItemType
 {
-    None,
     Speed,
-    Power
+    Power,
+    None
 }
 public class BuffItem : MonoBehaviour
 {
-    private BuffItemType itemType;
-    public void SetBuffItem(Vector3 position)
+    [SerializeField] private BuffItemType itemType;
+    public void SetBuffItem()
     {
-        gameObject.transform.position = position;
+        // int typeIndex = Random.Range(0, 10); // 0부터 9까지의 값 생성
+        // if(typeIndex >= (int)BuffItemType.None)
+        //     return;
         
-        int typeIndex = Random.Range(0, (int)BuffItemType.Power);
-
+        int typeIndex = Random.Range(0, 1); // 0부터 9까지의 값 생성
         itemType = (BuffItemType)typeIndex;
         
         gameObject.SetActive(true);
