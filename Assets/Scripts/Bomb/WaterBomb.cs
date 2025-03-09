@@ -101,7 +101,6 @@ public class WaterBomb : MonoBehaviour
             {
                 WaterBomb bomb = hit.collider.gameObject.GetComponent<WaterBomb>();
                 bomb.Explode();
-                CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
             }
             else if (((1 << hitLayer) & playerLayer) != 0)
             {
