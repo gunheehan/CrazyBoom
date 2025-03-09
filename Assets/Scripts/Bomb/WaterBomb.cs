@@ -1,11 +1,15 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterBomb : MonoBehaviour
 {
     public event Action<WaterBomb> OnExplosionEvent = null;
     [SerializeField] private Collider collider;
+    [SerializeField] private ParticleSystem particle;
+    private Stack<ParticleSystem> pool = new Stack<ParticleSystem>();
+
     private int objIndex;
     
     private int explosionRange = 1;
@@ -124,6 +128,7 @@ public class WaterBomb : MonoBehaviour
     {
         // obj[objIndex].transform.position = new Vector3(position.x, gameObject.transform.position.y, position.z);
         // objIndex++;
+        CreateSplash(gameObject.transform.position, position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -132,5 +137,40 @@ public class WaterBomb : MonoBehaviour
         {
             playerCollider = other.gameObject.GetComponent<Collider>();
         }
+    }
+    
+    private void CreateSplash(Vector3 start, Vector3 end)
+    {
+        ParticleSystem splash;
+
+        // 기존에 저장된 파티클이 있으면 가져와 사용
+        if (pool.Count > 0)
+            splash = pool.Pop();
+        else
+            splash = Instantiate(particle);
+
+        // 방향 및 위치 설정
+        Vector3 direction = (end - start).normalized;
+        float distance = Vector3.Distance(start, end);
+
+        splash.transform.position = start;
+        splash.transform.rotation = Quaternion.LookRotation(direction);
+
+        var main = splash.main;
+        main.startSpeed = distance * 5f; // 거리에 따라 속도 조정
+
+        splash.Emit(30); // 30개의 물줄기 발생
+        splash.gameObject.SetActive(true);
+
+        // 일정 시간 후 스택으로 반환
+        StartCoroutine(ReturnToPool(splash));
+    }
+
+    // 사용한 파티클을 다시 스택에 반환
+    private IEnumerator ReturnToPool(ParticleSystem splash)
+    {
+        yield return new WaitForSeconds(1f);
+        splash.gameObject.SetActive(false);
+        pool.Push(splash);
     }
 }
