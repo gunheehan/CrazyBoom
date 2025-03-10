@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public event Action<Vector3, float> OnChangeMoveInfo = null;
     private JoyStick joystick;
 
     private bool isMove = false;
@@ -30,13 +32,13 @@ public class PlayerMove : MonoBehaviour
         joystick.UpdateMove -= OnUpdatePlayerDirection;
     }
 
-    private void FixedUpdate()
-    {
-        if (isMove)
-        {
-            gameObject.transform.position += direction * (speed * Time.deltaTime);
-        }
-    }
+    // private void FixedUpdate()
+    // {
+    //     if (isMove)
+    //     {
+    //         gameObject.transform.position += direction * (speed * Time.deltaTime);
+    //     }
+    // }
 
     private void OnUpdatePlayerDirection(Vector2 pos)
     {
@@ -44,6 +46,7 @@ public class PlayerMove : MonoBehaviour
         {
             direction = Vector3.zero;
             isMove = false;
+            OnChangeMoveInfo?.Invoke(direction, 0f);
             return;
         }
 
@@ -65,5 +68,7 @@ public class PlayerMove : MonoBehaviour
             else
                 direction = Vector3.left;
         }
+        
+        OnChangeMoveInfo?.Invoke(direction, speed);
     }
 }

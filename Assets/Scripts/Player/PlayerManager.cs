@@ -4,14 +4,19 @@ using UnityEngine.InputSystem;
 public class PlayerManager : MonoBehaviour, IPlayerBuff
 {
     [SerializeField] private PlayerMove move;
+    [SerializeField] private Animator animator;
 
     private PlayerStat stat;
     private PlayerController controller;
+    private AnimationController animation;
+    private WalkBehaviour walkBehaviour;
 
     void Awake()
     {
         stat = new PlayerStat();
         controller = new PlayerController();
+        walkBehaviour = animator.GetBehaviour<WalkBehaviour>();
+        animation = new AnimationController(animator);
         move.OnUpdateSpeed(stat.GetPlayerSpeed);
     }
 
@@ -21,6 +26,9 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff
 
         controller.Player.Attack.performed += CreateBomb;
         controller.Player.Attack.Enable();
+        
+        move.OnChangeMoveInfo += walkBehaviour.SetMoveInfo;
+        move.OnChangeMoveInfo += animation.PlayWalk;
     }
 
     private void OnDisable()
@@ -29,6 +37,9 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff
         
         controller.Player.Attack.performed -= CreateBomb;
         controller.Player.Attack.Disable();
+        
+        move.OnChangeMoveInfo -= walkBehaviour.SetMoveInfo;
+        move.OnChangeMoveInfo -= animation.PlayWalk;
     }
 
     public void InitPlayer(Vector3 pos)
