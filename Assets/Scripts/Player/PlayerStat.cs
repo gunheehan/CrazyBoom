@@ -5,6 +5,7 @@ public class PlayerStatInfo
 {
     public int power = 1;
     public float speed = 3;
+    public int bombCount = 1;
 }
 public class PlayerStat : IPlayerBuff
 {
@@ -30,6 +31,24 @@ public class PlayerStat : IPlayerBuff
             return stateInfo.speed;
         }
     }
+
+    public int GetPlayerBombCount
+    {
+        get
+        {
+            if (stateInfo == null)
+                stateInfo = new PlayerStatInfo();
+            return stateInfo.bombCount;
+        }
+    }
+
+    public void UseBombStat(bool isCreated)
+    {
+        if (isCreated)
+            stateInfo.bombCount--;
+        else
+            stateInfo.bombCount++;
+    }
     
     public void OnBuff(BuffItemType buffType)
     {
@@ -46,6 +65,9 @@ public class PlayerStat : IPlayerBuff
                 break;
             case BuffItemType.Power:
                 stateInfo.power += 1;
+                break;
+            case BuffItemType.Bomb:
+                stateInfo.bombCount += 1;
                 break;
         }
         
@@ -66,6 +88,9 @@ public class PlayerStat : IPlayerBuff
                 break;
             case BuffItemType.Power:
                 stateInfo.power = stateInfo.power > 1 ? stateInfo.power - 1 : stateInfo.power ;
+                break;
+            case BuffItemType.Bomb:
+                stateInfo.bombCount = stateInfo.bombCount > 1 ? stateInfo.bombCount - 1 : stateInfo.bombCount ;
                 break;
         }
         OnUpdatePlayerStat?.Invoke(stateInfo);

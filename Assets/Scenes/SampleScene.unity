@@ -7004,7 +7004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c89d1368f4df4d7f8f485bbb34018f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 498351276}
 --- !u!95 &1624199693
 Animator:
   serializedVersion: 7

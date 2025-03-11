@@ -25,9 +25,9 @@ public class PlaneParts : MonoBehaviour
             SetObstacleBox();
     }
 
-    public void SetBomb(int power)
+    public void SetBomb(int power, Action OnExplodeCallback)
     {
-        bomb.SetBomb(power);
+        bomb.SetBomb(power, OnExplodeCallback);
     }
 
     public void SetObstacleBox()

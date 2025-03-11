@@ -6,6 +6,7 @@ public enum BuffItemType
 {
     Speed,
     Power,
+    Bomb,
     None
 }
 public class BuffItem : MonoBehaviour

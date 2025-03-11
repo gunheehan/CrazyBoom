@@ -48,17 +48,6 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff
         gameObject.SetActive(true);
     }
 
-    private void CreateBomb(InputAction.CallbackContext obj)
-    {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
-        {
-            Debug.Log(hit.collider.gameObject.name);
-            PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
-            plane?.SetBomb(stat.GetPlayerPower);
-        }
-    }
-
     public void OnBuff(BuffItemType buffType)
     {
         stat.OnBuff(buffType);
@@ -67,5 +56,20 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff
     public void OnDeBuff(BuffItemType buffType)
     {
         stat.OnDeBuff(buffType);
+    }
+    
+    private void CreateBomb(InputAction.CallbackContext obj)
+    {
+        if (stat.GetPlayerBombCount < 1)
+            return;
+        
+        stat.UseBombStat(true);
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
+        {
+            Debug.Log(hit.collider.gameObject.name);
+            PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
+            plane?.SetBomb(stat.GetPlayerPower, () => stat.UseBombStat(false));
+        }
     }
 }

@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class WaterBomb : MonoBehaviour
 {
-    public event Action<WaterBomb> OnExplosionEvent = null;
     [SerializeField] private Collider collider;
     [SerializeField] private ParticleSystem particle;
     private Stack<ParticleSystem> pool = new Stack<ParticleSystem>();
+
+    private Action OnExplodeAction;
 
     private int objIndex;
     
@@ -44,13 +45,14 @@ public class WaterBomb : MonoBehaviour
         }
     }
 
-    public void SetBomb(int power)
+    public void SetBomb(int power, Action OnExplode)
     {
         if (isSet)
             return;
 
         isSet = false;
         collider.isTrigger = true;
+        OnExplodeAction = OnExplode;
         gameObject.SetActive(true);
         explosionRange = power;
         StartCoroutine(WaitExplode());
@@ -70,7 +72,7 @@ public class WaterBomb : MonoBehaviour
         CheckDirection(Vector3.forward, origin, explosionRange);
         CheckDirection(Vector3.back, origin, explosionRange);
         
-        OnExplosionEvent?.Invoke(this);
+        OnExplodeAction?.Invoke();
         BombReset();
     }
 
