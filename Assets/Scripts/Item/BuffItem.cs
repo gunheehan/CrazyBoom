@@ -23,6 +23,11 @@ public class BuffItem : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void OnDamaged()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))

@@ -16,7 +16,8 @@ public class WaterBomb : MonoBehaviour
     private int explosionRange = 1;
     private LayerMask obstacleLayer;
     private LayerMask playerLayer;
-    private LayerMask bomb;
+    private LayerMask bombLayer;
+    private LayerMask buffLayer;
 
     private Collider playerCollider;
 
@@ -27,7 +28,8 @@ public class WaterBomb : MonoBehaviour
     {
         playerLayer = LayerMask.GetMask("Player", "OtherPlayer");
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
-        bomb = LayerMask.GetMask("Bomb"); 
+        bombLayer = LayerMask.GetMask("Bomb"); 
+        buffLayer = LayerMask.GetMask("Buff"); 
     }
     
     private void Update()
@@ -96,20 +98,28 @@ public class WaterBomb : MonoBehaviour
         if (remainingDistance <= 0) return;
 
         RaycastHit hit;
-        int layerMask = playerLayer | obstacleLayer | bomb;
-
-        if (Physics.Raycast(origin, direction, out hit, remainingDistance, layerMask))
+        int layerMask = playerLayer | obstacleLayer | bombLayer;
+        Vector3 neworigin = new Vector3(origin.x, 2f, origin.z);
+        if (Physics.Raycast(neworigin, direction, out hit, remainingDistance, layerMask))
         {
             int hitLayer = hit.collider.gameObject.layer;
+            Debug.Log(hit.collider.gameObject.name);
             float newRemainingDistance = remainingDistance - hit.distance;
 
-            if (((1 << hitLayer) & bomb) != 0)
+            if (((1 << hitLayer) & bombLayer) != 0)
             {
                 WaterBomb bomb = hit.collider.gameObject.GetComponent<WaterBomb>();
                 bomb.Explode();
             }
             else if (((1 << hitLayer) & playerLayer) != 0)
             {
+                CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
+            }
+            else if (((1 << hitLayer) & buffLayer) != 0)
+            {
+                Debug.Log("BuffItemCollllll");
+                BuffItem item = hit.collider.gameObject.GetComponent<BuffItem>();
+                item?.OnDamaged();
                 CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
             }
             else if (((1 << hitLayer) & obstacleLayer) != 0)
@@ -128,8 +138,6 @@ public class WaterBomb : MonoBehaviour
 
     private void CreateParticleEffect(Vector3 position)
     {
-        // obj[objIndex].transform.position = new Vector3(position.x, gameObject.transform.position.y, position.z);
-        // objIndex++;
         CreateSplash(gameObject.transform.position, position);
     }
 
