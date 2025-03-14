@@ -7,6 +7,8 @@ public class WaterBomb : MonoBehaviour
 {
     [SerializeField] private Collider collider;
     [SerializeField] private ParticleSystem particle;
+    [SerializeField] private RayTrailManager rayTrailManager;
+
     private Stack<ParticleSystem> pool = new Stack<ParticleSystem>();
 
     private Action OnExplodeAction;
@@ -26,10 +28,10 @@ public class WaterBomb : MonoBehaviour
     
     private void Start()
     {
+        buffLayer = LayerMask.GetMask("Water"); 
         playerLayer = LayerMask.GetMask("Player", "OtherPlayer");
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
         bombLayer = LayerMask.GetMask("Bomb"); 
-        buffLayer = LayerMask.GetMask("Buff"); 
     }
     
     private void Update()
@@ -100,32 +102,37 @@ public class WaterBomb : MonoBehaviour
         RaycastHit hit;
         int layerMask = playerLayer | obstacleLayer | bombLayer;
         Vector3 neworigin = new Vector3(origin.x, 2f, origin.z);
+
         if (Physics.Raycast(neworigin, direction, out hit, remainingDistance, layerMask))
         {
-            int hitLayer = hit.collider.gameObject.layer;
             Debug.Log(hit.collider.gameObject.name);
-            float newRemainingDistance = remainingDistance - hit.distance;
+            rayTrailManager.DrawRay(neworigin, hit.point); // 🟢 충돌 지점까지 선 그리기
 
+            int hitLayer = hit.collider.gameObject.layer;
+            float newRemainingDistance = remainingDistance - hit.distance;
+            if (((1 << hitLayer) & buffLayer) != 0)
+            {
+                Debug.Log("BuffItemCollllll");
+                IBuff item = hit.collider.gameObject.GetComponent<IBuff>();
+                item?.TakeDamege();
+                CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
+            }
             if (((1 << hitLayer) & bombLayer) != 0)
             {
                 WaterBomb bomb = hit.collider.gameObject.GetComponent<WaterBomb>();
                 bomb.Explode();
             }
-            else if (((1 << hitLayer) & playerLayer) != 0)
+            if (((1 << hitLayer) & playerLayer) != 0)
             {
+                IPlayer player = hit.collider.gameObject.GetComponent<IPlayer>();
+                player?.TakeDamage();
                 CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
             }
-            else if (((1 << hitLayer) & buffLayer) != 0)
-            {
-                Debug.Log("BuffItemCollllll");
-                BuffItem item = hit.collider.gameObject.GetComponent<BuffItem>();
-                item?.OnDamaged();
-                CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
-            }
-            else if (((1 << hitLayer) & obstacleLayer) != 0)
+            
+            if (((1 << hitLayer) & obstacleLayer) != 0)
             {
                 IObstacle obstacle = hit.collider.gameObject.GetComponent<IObstacle>();
-                obstacle.Damage();
+                obstacle?.Damage();
                 CreateParticleEffect(hit.point + direction.normalized * (hit.distance - 0.1f));
             }
         }

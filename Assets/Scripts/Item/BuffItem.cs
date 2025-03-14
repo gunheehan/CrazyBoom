@@ -9,12 +9,12 @@ public enum BuffItemType
     Bomb,
     None
 }
-public class BuffItem : MonoBehaviour
+public class BuffItem : MonoBehaviour, IBuff
 {
     [SerializeField] private BuffItemType itemType;
     public void SetBuffItem()
     {
-        int typeIndex = Random.Range(0, 10); // 0부터 9까지의 값 생성
+        int typeIndex = Random.Range(0, (int)BuffItemType.Bomb); // 0부터 9까지의 값 생성
         if(typeIndex >= (int)BuffItemType.None)
             return;
         
@@ -22,14 +22,15 @@ public class BuffItem : MonoBehaviour
         
         gameObject.SetActive(true);
     }
-
-    public void OnDamaged()
+    
+    public void TakeDamege()
     {
         gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             IPlayerBuff playerBuff = other.gameObject.GetComponent<IPlayerBuff>();

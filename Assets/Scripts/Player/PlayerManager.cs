@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerManager : MonoBehaviour, IPlayerBuff
+public class PlayerManager : MonoBehaviour, IPlayerBuff, IPlayer
 {
     [SerializeField] private PlayerMove move;
     [SerializeField] private Animator animator;
@@ -57,7 +57,7 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff
     {
         stat.OnDeBuff(buffType);
     }
-    
+
     private void CreateBomb(InputAction.CallbackContext obj)
     {
         if (stat.GetPlayerBombCount < 1)
@@ -71,5 +71,10 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff
             PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
             plane?.SetBomb(stat.GetPlayerPower, () => stat.UseBombStat(false));
         }
+    }
+
+    public void TakeDamage()
+    {
+        Debug.Log("Player Take Bomb");
     }
 }
