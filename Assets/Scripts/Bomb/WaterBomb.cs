@@ -7,7 +7,6 @@ public class WaterBomb : MonoBehaviour
 {
     [SerializeField] private Collider collider;
     [SerializeField] private ParticleSystem particle;
-    [SerializeField] private RayTrailManager rayTrailManager;
 
     private Stack<ParticleSystem> pool = new Stack<ParticleSystem>();
 
@@ -28,10 +27,10 @@ public class WaterBomb : MonoBehaviour
     
     private void Start()
     {
-        buffLayer = LayerMask.GetMask("Water"); 
         playerLayer = LayerMask.GetMask("Player", "OtherPlayer");
         obstacleLayer = LayerMask.GetMask("Obstacle"); 
         bombLayer = LayerMask.GetMask("Bomb"); 
+        buffLayer = LayerMask.GetMask("BuffItem"); 
     }
     
     private void Update()
@@ -100,19 +99,15 @@ public class WaterBomb : MonoBehaviour
         if (remainingDistance <= 0) return;
 
         RaycastHit hit;
-        int layerMask = playerLayer | obstacleLayer | bombLayer;
+        int layerMask = playerLayer | obstacleLayer | bombLayer | buffLayer;
         Vector3 neworigin = new Vector3(origin.x, 2f, origin.z);
 
         if (Physics.Raycast(neworigin, direction, out hit, remainingDistance, layerMask))
         {
-            Debug.Log(hit.collider.gameObject.name);
-            rayTrailManager.DrawRay(neworigin, hit.point); // 🟢 충돌 지점까지 선 그리기
-
             int hitLayer = hit.collider.gameObject.layer;
             float newRemainingDistance = remainingDistance - hit.distance;
             if (((1 << hitLayer) & buffLayer) != 0)
             {
-                Debug.Log("BuffItemCollllll");
                 IBuff item = hit.collider.gameObject.GetComponent<IBuff>();
                 item?.TakeDamege();
                 CheckDirection(direction, hit.point + direction.normalized * 0.1f, newRemainingDistance);
@@ -160,13 +155,11 @@ public class WaterBomb : MonoBehaviour
     {
         ParticleSystem splash;
 
-        // 기존에 저장된 파티클이 있으면 가져와 사용
         if (pool.Count > 0)
             splash = pool.Pop();
         else
             splash = Instantiate(particle);
 
-        // 방향 및 위치 설정
         Vector3 direction = (end - start).normalized;
         float distance = Vector3.Distance(start, end);
 
@@ -174,16 +167,14 @@ public class WaterBomb : MonoBehaviour
         splash.transform.rotation = Quaternion.LookRotation(direction);
 
         var main = splash.main;
-        main.startSpeed = distance * 5f; // 거리에 따라 속도 조정
+        main.startSpeed = distance * 5f;
 
-        splash.Emit(30); // 30개의 물줄기 발생
+        splash.Emit(30);
         splash.gameObject.SetActive(true);
 
-        // 일정 시간 후 스택으로 반환
         StartCoroutine(ReturnToPool(splash));
     }
 
-    // 사용한 파티클을 다시 스택에 반환
     private IEnumerator ReturnToPool(ParticleSystem splash)
     {
         yield return new WaitForSeconds(1f);
