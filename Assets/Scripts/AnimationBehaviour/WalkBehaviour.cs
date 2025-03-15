@@ -32,8 +32,8 @@ public class WalkBehaviour : StateMachineBehaviour
         if (direction.sqrMagnitude <= 0)
             return;
 
-        Vector3 rotate = new Vector3(direction.x, 1.5f, direction.z);
-        avatar.transform.LookAt(rotate);
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        avatar.transform.rotation = rotation;
         avatar.transform.position = Vector3.Lerp(avatar.transform.position, avatar.transform.position + direction, (moveSpeed*speedMagnification )* Time.deltaTime);
     }
 }
