@@ -721,7 +721,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 498351277}
   particle: {fileID: 972666845}
-  rayTrailManager: {fileID: 0}
 --- !u!135 &498351277
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1458,7 +1457,7 @@ GameObject:
   - component: {fileID: 972666845}
   - component: {fileID: 972666844}
   m_Layer: 0
-  m_Name: WaterParticle
+  m_Name: WaterBombParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1473,11 +1472,11 @@ Transform:
   m_GameObject: {fileID: 972666842}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -1}
+  m_LocalPosition: {x: -16.577179, y: 27.617258, z: 1.6667185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1489820484}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!199 &972666844
 ParticleSystemRenderer:
@@ -6483,6 +6482,7 @@ MonoBehaviour:
   obstacleItem: {fileID: 102511881}
   bomb: {fileID: 498351276}
   buffItem: {fileID: 918300576}
+  particleController: {fileID: 1489820483}
 --- !u!54 &1027815848
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6860,6 +6860,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382702209}
   m_CullTransparentMesh: 1
+--- !u!1 &1489820482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1489820484}
+  - component: {fileID: 1489820483}
+  m_Layer: 0
+  m_Name: ParticleController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1489820483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489820482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3bfcc0611ea14d5d8e729e47d8b7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterBombParticle: {fileID: 972666845}
+  particleContents: {fileID: 1489820484}
+--- !u!4 &1489820484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489820482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.577179, y: -26.617258, z: -2.6667185}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 972666843}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624199682
 GameObject:
   m_ObjectHideFlags: 0
@@ -9911,5 +9958,5 @@ SceneRoots:
   - {fileID: 1027815846}
   - {fileID: 243309141}
   - {fileID: 2072512375}
-  - {fileID: 972666843}
   - {fileID: 7513102285471193875}
+  - {fileID: 1489820484}

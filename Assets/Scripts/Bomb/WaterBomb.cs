@@ -1,15 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterBomb : MonoBehaviour
 {
+    public event Action<Vector3, Vector3> OnExplodeDirectionAction;
     [SerializeField] private Collider collider;
-    [SerializeField] private ParticleSystem particle;
-
-    private Stack<ParticleSystem> pool = new Stack<ParticleSystem>();
-
+    
     private Action OnExplodeAction;
 
     private int objIndex;
@@ -140,7 +137,7 @@ public class WaterBomb : MonoBehaviour
 
     private void CreateParticleEffect(Vector3 position)
     {
-        CreateSplash(gameObject.transform.position, position);
+        OnExplodeDirectionAction?.Invoke(gameObject.transform.position, position);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -149,36 +146,5 @@ public class WaterBomb : MonoBehaviour
         {
             playerCollider = other.gameObject.GetComponent<Collider>();
         }
-    }
-    
-    private void CreateSplash(Vector3 start, Vector3 end)
-    {
-        ParticleSystem splash;
-
-        if (pool.Count > 0)
-            splash = pool.Pop();
-        else
-            splash = Instantiate(particle);
-
-        Vector3 direction = (end - start).normalized;
-        float distance = Vector3.Distance(start, end);
-
-        splash.transform.position = start;
-        splash.transform.rotation = Quaternion.LookRotation(direction);
-
-        var main = splash.main;
-        main.startSpeed = distance * 5f;
-
-        splash.Emit(30);
-        splash.gameObject.SetActive(true);
-
-        StartCoroutine(ReturnToPool(splash));
-    }
-
-    private IEnumerator ReturnToPool(ParticleSystem splash)
-    {
-        yield return new WaitForSeconds(1f);
-        splash.gameObject.SetActive(false);
-        pool.Push(splash);
     }
 }
