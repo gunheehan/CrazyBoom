@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="multiplay 패키지 추가 및 로비 작업중" />
+    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="Multiplay 추가 및 로비 데모 구현중">
+      <change beforePath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,17 +35,13 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scenes/SampleScene.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/DefaultNetworkPrefabs.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Item/BuffItem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scripts/Item/BuffItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Plane/PlaneManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scripts/Player/PlayerManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scripts/Player/PlayerManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@7a907cf5a459/Editor/BurstDisassembler.Core.x86.info.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/ProjectSettings/TagManager.asset" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -129,7 +129,7 @@
       <workItem from="1741614852650" duration="3499000" />
       <workItem from="1741787828368" duration="1995000" />
       <workItem from="1741872953800" duration="2056000" />
-      <workItem from="1742913400596" duration="799000" />
+      <workItem from="1742913400596" duration="1322000" />
     </task>
     <task id="LOCAL-00001" summary="base file upload">
       <option name="closed" value="true" />
@@ -443,7 +443,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742914870923</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Multiplay 추가 및 로비 데모 구현중">
+      <option name="closed" value="true" />
+      <created>1742915140756</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1742915140756</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +478,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="폭탄 오브젝트 비활성화 위치 수정" />
     <MESSAGE value="장애물 Set 메서드 추가 및 불필요 로그 제거" />
     <MESSAGE value="Plane 생성구조 변경 및 Player Setting 구조 변경" />
     <MESSAGE value="폭탄 관리구조 변경(독립 -&gt; Plane 종속)" />
@@ -495,6 +502,7 @@
     <MESSAGE value="아바타 이동중 쓰러지는 이슈 수정" />
     <MESSAGE value="BuffItem 물폭탄 액션 추가중" />
     <MESSAGE value="multiplay 패키지 추가 및 로비 작업중" />
-    <option name="LAST_COMMIT_MESSAGE" value="multiplay 패키지 추가 및 로비 작업중" />
+    <MESSAGE value="Multiplay 추가 및 로비 데모 구현중" />
+    <option name="LAST_COMMIT_MESSAGE" value="Multiplay 추가 및 로비 데모 구현중" />
   </component>
 </project>
