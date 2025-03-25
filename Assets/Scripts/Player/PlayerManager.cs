@@ -67,7 +67,6 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff, IPlayer
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
         {
-            Debug.Log(hit.collider.gameObject.name);
             PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
             plane?.SetBomb(stat.GetPlayerPower, () => stat.UseBombStat(false));
         }
