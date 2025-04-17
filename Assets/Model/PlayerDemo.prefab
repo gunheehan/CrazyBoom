@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 8274456412536174242}
   - component: {fileID: 5695809930261782667}
   - component: {fileID: 7302417495963239147}
-  - component: {fileID: 4846717780096471551}
+  - component: {fileID: 5894490240898351892}
   m_Layer: 7
   m_Name: PlayerDemo
   m_TagString: Untagged
@@ -547,7 +547,7 @@ NavMeshAgent:
   m_BaseOffset: -0.03
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4846717780096471551
+--- !u!114 &5894490240898351892
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,7 +559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 806821762
+  GlobalObjectIdHash: 0
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
