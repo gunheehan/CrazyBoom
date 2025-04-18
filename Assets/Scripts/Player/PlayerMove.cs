@@ -1,7 +1,9 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+
+public class PlayerMove : NetworkBehaviour
 {
     public event Action<Vector3, float> OnChangeMoveInfo = null;
     private JoyStick joystick;
@@ -32,16 +34,10 @@ public class PlayerMove : MonoBehaviour
         joystick.UpdateMove -= OnUpdatePlayerDirection;
     }
 
-    // private void FixedUpdate()
-    // {
-    //     if (isMove)
-    //     {
-    //         gameObject.transform.position += direction * (speed * Time.deltaTime);
-    //     }
-    // }
-
     private void OnUpdatePlayerDirection(Vector2 pos)
     {
+        if (!IsOwner) return;
+        
         if (pos == Vector2.zero)
         {
             direction = Vector3.zero;

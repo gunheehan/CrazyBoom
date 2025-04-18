@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="Multiplay 추가 및 로비 데모 구현중">
+    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Model/PlayerDemo.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlayerDemo.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NGO_Minimal_Setup/PlayerPrefab.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/NGO_Minimal_Setup/PlayerPrefab.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.services.core/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.services.core/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,12 +41,19 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/DefaultNetworkPrefabs.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Item/BuffItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Network/ClientLobby.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Plane/PlaneManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/Client/ClientToServerRoomProxy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/ServerGameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/ServerRoomManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/LobbyItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/LobbyList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@7a907cf5a459/Editor/BurstDisassembler.Core.x86.info.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -129,7 +142,10 @@
       <workItem from="1741614852650" duration="3499000" />
       <workItem from="1741787828368" duration="1995000" />
       <workItem from="1741872953800" duration="2056000" />
-      <workItem from="1742913400596" duration="1322000" />
+      <workItem from="1742913400596" duration="1375000" />
+      <workItem from="1743230196725" duration="10281000" />
+      <workItem from="1744523855203" duration="3221000" />
+      <workItem from="1744958236824" duration="4664000" />
     </task>
     <task id="LOCAL-00001" summary="base file upload">
       <option name="closed" value="true" />
@@ -451,7 +467,47 @@
       <option name="project" value="LOCAL" />
       <updated>1742915140756</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="PlayerDemo Model Prefab분리">
+      <option name="closed" value="true" />
+      <created>1742915567169</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1742915567169</updated>
+    </task>
+    <task id="LOCAL-00042" summary="로비 구성중">
+      <option name="closed" value="true" />
+      <created>1742915586166</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1742915586166</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Lobby 추가중">
+      <option name="closed" value="true" />
+      <created>1743243539101</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1743243539101</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Sample씬 Main으로 명칭 변경 및 불필요 LobbyUI제거">
+      <option name="closed" value="true" />
+      <created>1744878380459</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1744878380460</updated>
+    </task>
+    <task id="LOCAL-00045" summary="PlayerPrefab 네이밍 수정">
+      <option name="closed" value="true" />
+      <created>1744878400139</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1744878400139</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,11 +534,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="장애물 Set 메서드 추가 및 불필요 로그 제거" />
-    <MESSAGE value="Plane 생성구조 변경 및 Player Setting 구조 변경" />
-    <MESSAGE value="폭탄 관리구조 변경(독립 -&gt; Plane 종속)" />
-    <MESSAGE value="Plane BlockBox 생성 로직 추가" />
-    <MESSAGE value="물풍선 재접근 제어 로직 추가" />
     <MESSAGE value="BombIdle Clip 추가" />
     <MESSAGE value="Bomb Animation 적용" />
     <MESSAGE value="물풍선 머테리얼 적용" />
@@ -503,6 +554,11 @@
     <MESSAGE value="BuffItem 물폭탄 액션 추가중" />
     <MESSAGE value="multiplay 패키지 추가 및 로비 작업중" />
     <MESSAGE value="Multiplay 추가 및 로비 데모 구현중" />
-    <option name="LAST_COMMIT_MESSAGE" value="Multiplay 추가 및 로비 데모 구현중" />
+    <MESSAGE value="PlayerDemo Model Prefab분리" />
+    <MESSAGE value="로비 구성중" />
+    <MESSAGE value="Lobby 추가중" />
+    <MESSAGE value="Sample씬 Main으로 명칭 변경 및 불필요 LobbyUI제거" />
+    <MESSAGE value="PlayerPrefab 네이밍 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="PlayerPrefab 네이밍 수정" />
   </component>
 </project>
