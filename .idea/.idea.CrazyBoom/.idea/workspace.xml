@@ -6,13 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DefaultNetworkPrefabs.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Model/PlayerDemo.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Model/PlayerDemo.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NGO_Minimal_Setup/PlayerPrefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/NGO_Minimal_Setup/PlayerPrefab.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.services.core/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.services.core/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -145,7 +138,7 @@
       <workItem from="1742913400596" duration="1375000" />
       <workItem from="1743230196725" duration="10281000" />
       <workItem from="1744523855203" duration="3221000" />
-      <workItem from="1744958236824" duration="4664000" />
+      <workItem from="1744958236824" duration="5569000" />
     </task>
     <task id="LOCAL-00001" summary="base file upload">
       <option name="closed" value="true" />
@@ -507,7 +500,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744878400139</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Server 구성중(Linux 실행용)&#10;Lobby Room 관리 구조 구현">
+      <option name="closed" value="true" />
+      <created>1744963566066</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1744963566066</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +535,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="BombIdle Clip 추가" />
     <MESSAGE value="Bomb Animation 적용" />
     <MESSAGE value="물풍선 머테리얼 적용" />
     <MESSAGE value="Buff 타입 수정(Random None 확률 올리는 용도)" />
@@ -559,6 +559,7 @@
     <MESSAGE value="Lobby 추가중" />
     <MESSAGE value="Sample씬 Main으로 명칭 변경 및 불필요 LobbyUI제거" />
     <MESSAGE value="PlayerPrefab 네이밍 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="PlayerPrefab 네이밍 수정" />
+    <MESSAGE value="Server 구성중(Linux 실행용)&#10;Lobby Room 관리 구조 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server 구성중(Linux 실행용)&#10;Lobby Room 관리 구조 구현" />
   </component>
 </project>
