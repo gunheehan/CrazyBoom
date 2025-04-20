@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -48,8 +50,10 @@ public class ServerRoomManager : NetworkBehaviour
                 TargetClientIds = new List<ulong> { clientId }
             }
         };
+        
+        FixedString32Bytes[] roomArray = roomList.Select(name => (FixedString32Bytes)name).ToArray();
 
-        RoomListUpdateClientRpc(roomList, clientRpcParams);
+        RoomListUpdateClientRpc(roomArray, clientRpcParams);
     }
 
     private void SendRoomListToClients(List<string> roomList, List<ulong> clients)
@@ -61,13 +65,16 @@ public class ServerRoomManager : NetworkBehaviour
                 TargetClientIds = new List<ulong>(NetworkManager.Singleton.ConnectedClientsIds)
             }
         };
-
-        RoomListUpdateClientRpc(roomList, clientRpcParams);
+        
+        FixedString32Bytes[] roomArray = roomList.Select(name => (FixedString32Bytes)name).ToArray();
+        
+        RoomListUpdateClientRpc(roomArray, clientRpcParams);
     }
 
     [ClientRpc]
-    private void RoomListUpdateClientRpc(List<string> roomList, ClientRpcParams clientRpcParams = default)
+    private void RoomListUpdateClientRpc(FixedString32Bytes[] roomArray, ClientRpcParams clientRpcParams = default)
     {
+        List<string> roomList = roomArray.Select(name => name.ToString()).ToList();
         RoomListEventDispatcher.InvokeRoomListUpdated(roomList);
     }
 
