@@ -16,13 +16,43 @@ public class NetworkManagerUI : MonoBehaviour
 
     private void Start()
     {
-        start_btn.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartServer();
-        });
+        // start_btn.onClick.AddListener(() =>
+        // {
+        //     NetworkManager.Singleton.StartServer();
+        // });
         
-        startClient_btn.onClick.AddListener(StartClient);
+        startClient_btn.onClick.AddListener(ConnectToServer);
         createlobby.onClick.AddListener(CreateLobby);
+        NetworkManager.Singleton.OnClientConnectedCallback += (clientId) =>
+        {
+            Debug.Log($"서버에서 클라이언트 {clientId} 접속 확인");
+        };
+        NetworkManager.Singleton.OnClientConnectedCallback += (clientId) =>
+        {
+            if (clientId == NetworkManager.Singleton.LocalClientId)
+            {
+                Debug.Log("클라이언트: 서버 연결 성공!");
+            }
+        };
+    }
+    
+    public string serverIP = "175.116.241.172";  // 서버 IP 기본값
+    public ushort serverPort = 7777;       // 서버 포트 기본값
+
+    // UI 버튼 등에서 호출할 수 있도록 public 함수
+    public void ConnectToServer()
+    {
+        Debug.Log(NetworkManager.Singleton == null ? "NetworkManager.Singleton is NULL" : "NetworkManager.Singleton OK");
+
+        // NetworkManager의 Transport 설정을 서버 IP/포트로 지정
+        var transport = NetworkManager.Singleton.GetComponent<Unity.Netcode.Transports.UTP.UnityTransport>();
+        transport.ConnectionData.Address = "175.116.241.172";
+        transport.ConnectionData.Port = serverPort;
+
+        // 클라이언트 시작
+        NetworkManager.Singleton.StartClient();
+
+        Debug.Log($"서버에 접속 시도: {serverIP}:{serverPort}");
     }
 
     private async void StartClient()

@@ -8,8 +8,12 @@ public class ServerBootstrap : MonoBehaviour
         // 서버 모드로 실행될 때만 StartServer
         if (Application.isBatchMode)
         {
-            NetworkManager.Singleton.GetComponent<Unity.Netcode.Transports.UTP.UnityTransport>().SetConnectionData("0.0.0.0", 7777);
+            Debug.Log("Starting Server");
             NetworkManager.Singleton.StartServer();
+        }
+        else
+        {
+            Debug.Log("Startring as Client or Host (Editor/Standalone)");
         }
     }
 }

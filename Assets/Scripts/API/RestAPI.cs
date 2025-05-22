@@ -64,6 +64,39 @@ public static class RestAPI
             }
         }
     }
+    
+    public static async Task<string> GetWithQueryAsync(string url, Dictionary<string, string> queryParams, Dictionary<string, string> headers = null)
+    {
+        using (var client = new HttpClient())
+        {
+            try
+            {
+                // 쿼리 문자열 생성
+                if (queryParams != null && queryParams.Count > 0)
+                {
+                    var query = string.Join("&", queryParams.Select(kv => $"{Uri.EscapeDataString(kv.Key)}={Uri.EscapeDataString(kv.Value)}"));
+                    url += (url.Contains("?") ? "&" : "?") + query;
+                }
+
+                if (headers != null)
+                    SetHeader(client, headers);
+
+                var response = await client.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    return $"Error: {response.StatusCode} - {errorContent}";
+                }
+
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+    }
 
     public static async Task<string> PostAsync(string url, Dictionary<string, string> headers = null,
         Dictionary<string, string> body = null)
