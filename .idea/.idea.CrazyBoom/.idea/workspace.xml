@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Server.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Server.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/API/RestAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/API/RestAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Build Profiles/New Linux Server Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Build Profiles/New Linux Server Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.dedicated-server/MultiplayerRolesSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.dedicated-server/MultiplayerRolesSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,14 +146,8 @@
       <workItem from="1746516369056" duration="4086000" />
       <workItem from="1746633605630" duration="4961000" />
       <workItem from="1747928017174" duration="1984000" />
-    </task>
-    <task id="LOCAL-00001" summary="base file upload">
-      <option name="closed" value="true" />
-      <created>1740409873612</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1740409873612</updated>
+      <workItem from="1747931388751" duration="534000" />
+      <workItem from="1748181749887" duration="1000" />
     </task>
     <task id="LOCAL-00002" summary="input system PlayerController 추가">
       <option name="closed" value="true" />
@@ -549,7 +533,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746520548808</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="linux hosting 서버 연결 성공(씬 목록 수정 후 재빌드 필요)">
+      <option name="closed" value="true" />
+      <created>1747931659265</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1747931659265</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +568,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="ObstacleBox 파괴 이벤트 추가" />
     <MESSAGE value="이동속도 버프 조정" />
     <MESSAGE value="버프 처리 로직 추가" />
     <MESSAGE value="버프 씬 적용" />
@@ -601,6 +592,7 @@
     <MESSAGE value="ClientRpc List&lt;string&gt; 오류 수정" />
     <MESSAGE value="linux server 연결중" />
     <MESSAGE value="RestAPI 스크립트 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="RestAPI 스크립트 추가" />
+    <MESSAGE value="linux hosting 서버 연결 성공(씬 목록 수정 후 재빌드 필요)" />
+    <option name="LAST_COMMIT_MESSAGE" value="linux hosting 서버 연결 성공(씬 목록 수정 후 재빌드 필요)" />
   </component>
 </project>
