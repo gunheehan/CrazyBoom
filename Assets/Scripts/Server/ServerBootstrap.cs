@@ -3,6 +3,14 @@ using Unity.Netcode;
 
 public class ServerBootstrap : MonoBehaviour
 {
+    void Awake()
+    {
+        NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
+        {
+            Debug.Log($"Client connected: {id}");
+        };
+    }
+    
     void Start()
     {
         // 서버 모드로 실행될 때만 StartServer
