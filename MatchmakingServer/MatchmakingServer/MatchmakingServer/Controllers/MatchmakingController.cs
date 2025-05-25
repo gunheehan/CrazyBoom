@@ -17,10 +17,19 @@ public class MatchmakingController : ControllerBase
     }
 
     [HttpPost("create-room")]
-    public IActionResult CreateRoom([FromQuery] string name, [FromQuery] int maxPlayers = 4)
+    public IActionResult CreateRoom([FromQuery] string name, [FromQuery] string playerid,
+        [FromQuery] int maxPlayers = 4)
     {
+        // 방 생성
         var room = _roomService.CreateRoom(name, maxPlayers);
-        return Ok(room);
+
+        // 생성한 방에 방장(Player) 자동 참가
+        var joinedRoom = _roomService.JoinRoom(room.Id, playerid);
+
+        if (joinedRoom == null)
+            return BadRequest("Failed to join the newly created room.");
+
+        return Ok(joinedRoom);
     }
 
     [HttpPost("join-room")]
