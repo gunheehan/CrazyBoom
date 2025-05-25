@@ -7,16 +7,16 @@ EXPOSE 7800
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["MatchmakingServer/MatchmakingServer.csproj", "MatchmakingServer/"]
-RUN dotnet restore "MatchmakingServer/MatchmakingServer.csproj"
+COPY ["MatchmakingServer.csproj", "."]
+RUN dotnet restore "MatchmakingServer.csproj"
 COPY . .
-WORKDIR "/src/MatchmakingServer"
-RUN dotnet build "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/build
+#WORKDIR "/src/MatchmakingServer"
+RUN dotnet build "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/bui>
 
 # 3. Publish 단계
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/p>
 
 # 4. 최종 실행 이미지
 FROM base AS final
