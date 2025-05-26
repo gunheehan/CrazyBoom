@@ -11,12 +11,12 @@ COPY ["MatchmakingServer.csproj", "."]
 RUN dotnet restore "MatchmakingServer.csproj"
 COPY . .
 #WORKDIR "/src/MatchmakingServer"
-RUN dotnet build "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/bui>
+RUN dotnet build "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/buiild
 
 # 3. Publish 단계
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/p>
+RUN dotnet publish "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # 4. 최종 실행 이미지
 FROM base AS final
