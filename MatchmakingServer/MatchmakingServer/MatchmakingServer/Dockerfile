@@ -7,6 +7,13 @@ EXPOSE 7800
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
+#필수 패키지 설치
+RUN apt-get update && apt-get install -y \
+    clang \
+    gcc \
+    zlib1g-dev
+
 COPY ["MatchmakingServer.csproj", "."]
 RUN dotnet restore "MatchmakingServer.csproj"
 COPY . .
@@ -16,7 +23,7 @@ RUN dotnet build "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/buii
 # 3. Publish 단계
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "MatchmakingServer.csproj" -c $BUILD_CONFIGURATION -o /app/pub>
 
 # 4. 최종 실행 이미지
 FROM base AS final
