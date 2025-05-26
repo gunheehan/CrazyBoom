@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MatchmakingServer.Services;
 using MatchmakingServer.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace MatchmakingServer.Controllers;
 
@@ -38,6 +39,15 @@ public class MatchmakingController : ControllerBase
         var room = _roomService.JoinRoom(roomId, playerId);
         if (room == null)
             return NotFound("Room not found or full");
+        return Ok(room);
+    }
+
+    [HttpPost("leave-room")]
+    public IActionResult LeaveRoom([FromQuery] string roomId, [FromQuery] string playerid)
+    {
+        var room = _roomService.LeaveRoom(roomId, playerid);
+        if (room == null)
+            return NotFound("Room not found or removed");
         return Ok(room);
     }
 

@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
-    </list>
+    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,6 +42,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/Client/ClientToServerRoomProxy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scripts/Server/ServerBootstrap.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/ServerRoomManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/LobbyItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/LobbyList.cs" root0="FORCE_HIGHLIGHTING" />
@@ -147,23 +144,7 @@
       <workItem from="1746633605630" duration="4961000" />
       <workItem from="1747928017174" duration="1984000" />
       <workItem from="1747931388751" duration="534000" />
-      <workItem from="1748181749887" duration="1000" />
-    </task>
-    <task id="LOCAL-00002" summary="input system PlayerController 추가">
-      <option name="closed" value="true" />
-      <created>1740409902605</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1740409902605</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Joystick Event 처리 구성중">
-      <option name="closed" value="true" />
-      <created>1740409924129</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1740409924129</updated>
+      <workItem from="1748181751952" duration="3115000" />
     </task>
     <task id="LOCAL-00004" summary="NavMesh 영역 수정">
       <option name="closed" value="true" />
@@ -541,7 +522,23 @@
       <option name="project" value="LOCAL" />
       <updated>1747931659265</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="서버 유저 접속 확인 로그 추가">
+      <option name="closed" value="true" />
+      <created>1748184718259</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1748184718260</updated>
+    </task>
+    <task id="LOCAL-00052" summary="매치메이킹 베이스 프로젝트 추가">
+      <option name="closed" value="true" />
+      <created>1748184732228</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1748184732228</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,8 +565,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="이동속도 버프 조정" />
-    <MESSAGE value="버프 처리 로직 추가" />
     <MESSAGE value="버프 씬 적용" />
     <MESSAGE value="BuffItemIdle 애니메이션 추가 및 적용" />
     <MESSAGE value="buffItem 생성 확률 수정" />
@@ -593,6 +588,8 @@
     <MESSAGE value="linux server 연결중" />
     <MESSAGE value="RestAPI 스크립트 추가" />
     <MESSAGE value="linux hosting 서버 연결 성공(씬 목록 수정 후 재빌드 필요)" />
-    <option name="LAST_COMMIT_MESSAGE" value="linux hosting 서버 연결 성공(씬 목록 수정 후 재빌드 필요)" />
+    <MESSAGE value="서버 유저 접속 확인 로그 추가" />
+    <MESSAGE value="매치메이킹 베이스 프로젝트 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="매치메이킹 베이스 프로젝트 추가" />
   </component>
 </project>

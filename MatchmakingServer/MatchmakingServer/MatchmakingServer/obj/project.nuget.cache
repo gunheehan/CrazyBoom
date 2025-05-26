@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dGPtGJfs37U=",
+  "dgSpecHash": "6GlJxsvnnhVhdPA+D9dkFkHrzkKjUofazXT2wIUA0rmz5nrFRTQq7KUvt99cqWReKeVvnUMQZM6pyqXEFpSuzA==",
   "success": true,
   "projectFilePath": "/Users/gunhee/Documents/GitHub/CrazyBoom/MatchmakingServer/MatchmakingServer/MatchmakingServer/MatchmakingServer.csproj",
   "expectedPackageFiles": [
@@ -15,7 +15,7 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "'System.Text.Json' 7.0.2 패키지에 알려진 높은 심각도 취약성인 https://github.com/advisories/GHSA-hh2w-p6rv-4g7w이(가) 있습니다.",
+      "message": "Package 'System.Text.Json' 7.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-hh2w-p6rv-4g7w",
       "libraryId": "System.Text.Json",
       "targetGraphs": [
         "net8.0"

@@ -46,6 +46,24 @@ public class RoomService
             return null; // 방 없음
         }
     }
+    
+    public bool LeaveRoom(string roomId, string playerId)
+    {
+        lock (_lock)
+        {
+            if (_rooms.TryGetValue(roomId, out var room))
+            {
+                room.Players.Remove(playerId);
+                if (room.Players.Count == 0)
+                {
+                    // 플레이어가 한 명도 없으면 방 삭제
+                    _rooms.Remove(roomId);
+                }
+                return true;
+            }
+            return false;
+        }
+    }
 
 
     public List<Room> GetRooms() => _rooms.Values.ToList();
