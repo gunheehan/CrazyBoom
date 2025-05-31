@@ -4,21 +4,53 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="누락 파일 업로드">
+    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/bin/Debug/net8.0/MatchmakingServer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/bin/Debug/net8.0/MatchmakingServer.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bomb/BombController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bomb/BombController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bomb/WaterBomb.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bomb/WaterBomb.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/JoyStick.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/JoyStick.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/ClientLobby.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/ClientLobby.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/ClientManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Network/ClientManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacle/IObstacle.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacle/IObstacle.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacle/ObstacleBox.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacle/ObstacleBox.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ParticleController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ParticleController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneParts.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneParts.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/IPlayerBuff.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/IPlayerBuff.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerStat.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerStat.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Process/GameManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Process/GameManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/Client/ClientToServerRoomProxy.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/Client/ClientToServerRoomProxy.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/ServerRoomManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/ServerRoomManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ButtonUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ButtonUI.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyItem.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyItem.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyList.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyList.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/ref/MatchmakingServer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/ref/MatchmakingServer.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/refint/MatchmakingServer.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/refint/MatchmakingServer.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +126,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.39f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath $PROJECT_DIR$ -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -102,7 +134,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.39f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/2022.3.15f1/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath $PROJECT_DIR$ -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -161,6 +193,8 @@
       <workItem from="1747931388751" duration="534000" />
       <workItem from="1748181751952" duration="3115000" />
       <workItem from="1748269383880" duration="655000" />
+      <workItem from="1748612240696" duration="3207000" />
+      <workItem from="1748672864812" duration="3325000" />
     </task>
     <task id="LOCAL-00005" summary="장애물 Player 충돌 밀림 현상 수정">
       <option name="closed" value="true" />
