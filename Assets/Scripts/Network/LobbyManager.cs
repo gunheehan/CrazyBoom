@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 
 public class LobbyManager : MonoBehaviour
 {
-    public event System.Action<List<Lobby>> OnLobbyListUpdated; // 로비 목록이 업데이트될 때 호출될 콜백
+    public event Action<List<Lobby>> OnLobbyListUpdated; // 로비 목록이 업데이트될 때 호출될 콜백
+    public event Action<Lobby> joinLobbyEvent;
+    public event Action leaveLobbyEvent;
 
     private static LobbyManager instance;
     public static LobbyManager Instance
@@ -25,6 +28,7 @@ public class LobbyManager : MonoBehaviour
     private Lobby currentLobby;
     private Coroutine heartbeatCoroutine;
     private string playerId;
+    private string playerName;
 
     private void Awake()
     {
@@ -39,38 +43,47 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    private async void Start()
-    {
-        await InitializeUnityServices();
-    }
-
     // 1️⃣ Unity Gaming Services 초기화
-    private async Task InitializeUnityServices()
+    public async Task InitializeUnityServices(string playername)
     {
-        await UnityServices.InitializeAsync();
-
-        if (!AuthenticationService.Instance.IsSignedIn)
+        Debug.Log("로그인 시도중");
+        try
         {
+            await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+
+            playerId = AuthenticationService.Instance.PlayerId;
+            playerName = playername;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
         }
 
-        playerId = AuthenticationService.Instance.PlayerId;
-        Debug.Log("로그인 완료: " + playerId);
-        StartCoroutine(UpdateLobbyListCoroutine());
+        Debug.Log("로그인 완료: " + playerName);
+        //StartCoroutine(UpdateLobbyListCoroutine());
+        await RefreshLobbyList();
     }
 
     // 2️⃣ 로비 생성
-    public async Task<Lobby> CreateLobby(string lobbyName, int maxPlayers)
+    public async Task CreateLobby(string lobbyName, int maxPlayers)
     {
         try
         {
             CreateLobbyOptions options = new CreateLobbyOptions
             {
                 IsPrivate = false,
-                Player = new Player(id: playerId),
+                Player = new Player
+                (
+                    id: playerId,
+                    data: new Dictionary<string, PlayerDataObject>
+                    {
+                        { "nickname", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                    }
+                ),
                 Data = new Dictionary<string, DataObject>
                 {
-                    { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, "Normal") }
+                    { "GameMode", new DataObject(DataObject.VisibilityOptions.Public, "Normal") },
                 }
             };
 
@@ -80,12 +93,12 @@ public class LobbyManager : MonoBehaviour
             // 하트비트(유지) 시작
             heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(currentLobby.Id));
 
-            return currentLobby;
+            joinLobbyEvent?.Invoke(currentLobby);
+            await RefreshLobbyList();
         }
         catch (LobbyServiceException e)
         {
             Debug.LogError("로비 생성 실패: " + e.Message);
-            return null;
         }
     }
 
@@ -96,7 +109,14 @@ public class LobbyManager : MonoBehaviour
         {
             JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
             {
-                Player = new Player( id: playerId )
+                Player = new Player
+                (
+                    id: playerId,
+                    data: new Dictionary<string, PlayerDataObject>
+                    {
+                        { "nickname", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                    }
+                )
             };
 
             currentLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
@@ -107,6 +127,25 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.LogError("로비 참가 실패: " + e.Message);
             return null;
+        }
+    }
+    
+    public async void LeaveLobby()
+    {
+        if(currentLobby == null) return;
+
+        try
+        {
+            MigrateHost();
+            await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, AuthenticationService.Instance.PlayerId);
+            currentLobby = null;
+
+            leaveLobbyEvent?.Invoke();
+            await RefreshLobbyList();
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log($"{e}");
         }
     }
 
@@ -160,6 +199,26 @@ public class LobbyManager : MonoBehaviour
         {
             LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
             yield return new WaitForSeconds(15);
+        }
+    }
+    
+    private bool IsLobbyhost()
+    {
+        return currentLobby != null && currentLobby.HostId == AuthenticationService.Instance.PlayerId;
+    }
+    
+    private async void MigrateHost()
+    {
+        if(!IsLobbyhost() || currentLobby.Players.Count <= 1)  return;
+        try
+        {
+            currentLobby = await LobbyService.Instance.UpdateLobbyAsync(currentLobby.Id, new UpdateLobbyOptions{
+                HostId = currentLobby.Players[1].Id
+            });
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log($"{e}");
         }
     }
 }

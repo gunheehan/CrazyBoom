@@ -21,7 +21,7 @@ public class NetworkManagerUI : MonoBehaviour
         //     NetworkManager.Singleton.StartServer();
         // });
         
-        startClient_btn.onClick.AddListener(ConnectToServer);
+        //startClient_btn.onClick.AddListener(ConnectToServer);
         createlobby.onClick.AddListener(CreateLobby);
         NetworkManager.Singleton.OnClientConnectedCallback += (clientId) =>
         {

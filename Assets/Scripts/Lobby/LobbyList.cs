@@ -122,7 +122,7 @@ public class LobbyList : MonoBehaviour
         else
             item = Instantiate(lobbyitemPrefab, lobbyitemParent);
         
-        item.transform.SetAsFirstSibling();
+        item.transform.SetAsLastSibling();
         
         lobbyItemList.Add(item);
         return item;
