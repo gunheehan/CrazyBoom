@@ -4,49 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="누락 파일 업로드">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyItem.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyList.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Room/PlayerListModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Room/PlayerListModel.cs.meta" afterDir="false" />
+    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="로비 생성 및 접속 로직 추가">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerSession.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerSession.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Lobby.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bomb/BombController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bomb/BombController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Bomb/WaterBomb.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Bomb/WaterBomb.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/JoyStick.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/JoyStick.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/JoyStick/PlayerController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/ClientLobby.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Network/ClientLobby.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/ClientManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Network/ClientManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacle/IObstacle.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacle/IObstacle.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Obstacle/ObstacleBox.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Obstacle/ObstacleBox.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ParticleController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ParticleController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneParts.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Plane/PlaneParts.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/IPlayerBuff.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/IPlayerBuff.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerMove.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerStat.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerStat.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Process/GameManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Process/GameManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/Client/ClientToServerRoomProxy.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/Client/ClientToServerRoomProxy.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Server/ServerRoomManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Server/ServerRoomManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ButtonUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ButtonUI.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyItem.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/LobbyList.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/NetworkManagerUI.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lobby/LoginUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LoginUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Network/LobbyManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lobby/LobbyManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Room/PlayerListContoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Room/PlayerListContoller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,6 +44,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/API/RestAPI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scripts/Animation/AnimationController.cs.meta" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Item/BuffItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Lobby/CreateLobbyUI.cs" root0="FORCE_HIGHLIGHTING" />
@@ -187,14 +155,6 @@
       <workItem from="1747931388751" duration="534000" />
       <workItem from="1748181751952" duration="3115000" />
       <workItem from="1748269383880" duration="655000" />
-    </task>
-    <task id="LOCAL-00005" summary="장애물 Player 충돌 밀림 현상 수정">
-      <option name="closed" value="true" />
-      <created>1741004963528</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1741004963528</updated>
     </task>
     <task id="LOCAL-00006" summary="Buff Item 네이밍 수정">
       <option name="closed" value="true" />
@@ -580,7 +540,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748269427201</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="로비 생성 및 접속 로직 추가">
+      <option name="closed" value="true" />
+      <created>1748767089805</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1748767089805</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -607,7 +575,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="BuffItemIdle 애니메이션 추가 및 적용" />
     <MESSAGE value="buffItem 생성 확률 수정" />
     <MESSAGE value="물폭탄 중복 데미지 연산 제거" />
     <MESSAGE value="WaterBobm 물줄기 이펙트 적용중" />
@@ -632,6 +599,7 @@
     <MESSAGE value="서버 유저 접속 확인 로그 추가" />
     <MESSAGE value="매치메이킹 베이스 프로젝트 추가" />
     <MESSAGE value="누락 파일 업로드" />
-    <option name="LAST_COMMIT_MESSAGE" value="누락 파일 업로드" />
+    <MESSAGE value="로비 생성 및 접속 로직 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="로비 생성 및 접속 로직 추가" />
   </component>
 </project>

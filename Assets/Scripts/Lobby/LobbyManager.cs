@@ -7,9 +7,11 @@ using Unity.Services.Lobbies.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
+    public event Action<bool> OnEnterdLobby;
     public event Action<List<Lobby>> OnLobbyListUpdated; // 로비 목록이 업데이트될 때 호출될 콜백
     public event Action<Lobby> joinLobbyEvent;
     public event Action leaveLobbyEvent;
@@ -61,6 +63,7 @@ public class LobbyManager : MonoBehaviour
         }
 
         Debug.Log("로그인 완료: " + playerName);
+        OnEnterdLobby?.Invoke(true);
         //StartCoroutine(UpdateLobbyListCoroutine());
         await RefreshLobbyList();
     }
@@ -94,7 +97,9 @@ public class LobbyManager : MonoBehaviour
             heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(currentLobby.Id));
 
             joinLobbyEvent?.Invoke(currentLobby);
-            await RefreshLobbyList();
+            PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
+            SceneManager.LoadScene("Game");
+            //await RefreshLobbyList();
         }
         catch (LobbyServiceException e)
         {

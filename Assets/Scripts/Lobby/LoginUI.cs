@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,17 @@ public class LoginUI : MonoBehaviour
         errorMessage_text.text = string.Empty;
     }
 
+    private void OnEnable()
+    {
+        Debug.Log("세팅이 왜도냐");
+        LobbyManager.Instance.OnEnterdLobby += OnEnterdLobby;
+    }
+
+    private void OnDisable()
+    {
+        LobbyManager.Instance.OnEnterdLobby -= OnEnterdLobby;
+    }
+
     private void OnclickLogin()
     {
         if (string.IsNullOrEmpty(playerName_inputfield.text))
@@ -26,5 +38,10 @@ public class LoginUI : MonoBehaviour
         errorMessage_text.text = string.Empty;
 
         LobbyManager.Instance.InitializeUnityServices(playerName_inputfield.text);
+    }
+
+    private void OnEnterdLobby(bool isEnter)
+    {
+        gameObject.SetActive(isEnter);
     }
 }
