@@ -18,7 +18,6 @@ public class LoginUI : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("세팅이 왜도냐");
         LobbyManager.Instance.OnEnterdLobby += OnEnterdLobby;
     }
 
@@ -42,6 +41,6 @@ public class LoginUI : MonoBehaviour
 
     private void OnEnterdLobby(bool isEnter)
     {
-        gameObject.SetActive(isEnter);
+        gameObject.SetActive(!isEnter);
     }
 }
