@@ -1,16 +1,15 @@
 using System;
 using Unity.Services.Lobbies.Models;
-using Unity.Services.Relay.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LobbyItem : MonoBehaviour
 {
+    public Action<string> OnClickLobbyItem = null;
     [SerializeField] private Text lobbyname_txt;
     [SerializeField] private Text lobbyplayerinfo_txt;
     [SerializeField] private Button lobby_btn;
 
-    private LobbyList lobbyList;
     private Lobby lobby;
 
     private void Start()
@@ -18,10 +17,9 @@ public class LobbyItem : MonoBehaviour
         lobby_btn.onClick.AddListener(Join);
     }
 
-    public void Initialise(LobbyList lobbylist, Lobby lobby)
+    public void Initialise(Lobby lobby)
     {
         Debug.LogError("이름 : " + lobby.Name);
-        lobbyList = lobbylist;
         this.lobby = lobby;
 
         lobbyname_txt.text = this.lobby.Name;
@@ -32,6 +30,6 @@ public class LobbyItem : MonoBehaviour
 
     private void Join()
     {
-        lobbyList.JoinAsync(lobby);
+        OnClickLobbyItem?.Invoke(lobby.Id);
     }
 }

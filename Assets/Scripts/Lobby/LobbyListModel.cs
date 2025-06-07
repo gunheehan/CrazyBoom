@@ -9,6 +9,7 @@ public class LobbyListModel
     public Action<List<Lobby>> OnUpdateLobbyList = null;
     
     private bool isRefreshing = false;
+    private bool isJoin = false;
 
     public async void RefreshLobby()
     {
@@ -50,5 +51,23 @@ public class LobbyListModel
     public void UpdateLobbyList(List<Lobby> lobbies)
     {
         OnUpdateLobbyList?.Invoke(lobbies);
+    }
+    
+    public async void JoinAsync(string lobbyid)
+    {
+        if (isJoin)
+            return;
+
+        isJoin = true;
+        try
+        {
+            LobbyManager.Instance.JoinLobbyByCode(lobbyid);
+        }
+        catch(LobbyServiceException e)
+        {
+            Debug.Log(e);
+            isJoin = false;
+            throw;
+        }
     }
 }

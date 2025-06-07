@@ -1,25 +1,30 @@
-using System;
 using UnityEngine;
 
 public class LobbyListPresenter : MonoBehaviour
 {
     [SerializeField] private LobbyListUI ui;
 
-    private LobbyListModel model;
+    private LobbyListModel model = new LobbyListModel();
     
     void Start()
     {
-        model = new LobbyListModel();
+        OnEnable();
     }
 
     private void OnEnable()
     {
         LobbyManager.Instance.OnEnterdLobby += OnEnteredLobby;
+        LobbyManager.Instance.OnLobbyListUpdated += model.UpdateLobbyList;
+        ui.OnClickJoinLobby += model.JoinAsync;
+        model.OnUpdateLobbyList += ui.UpdateList;
     }
 
     private void OnDisable()
     {
         LobbyManager.Instance.OnEnterdLobby -= OnEnteredLobby;
+        LobbyManager.Instance.OnLobbyListUpdated -= model.UpdateLobbyList;
+        ui.OnClickJoinLobby -= model.JoinAsync;
+        model.OnUpdateLobbyList -= ui.UpdateList;
     }
 
     private void OnEnteredLobby(bool isEnter)
