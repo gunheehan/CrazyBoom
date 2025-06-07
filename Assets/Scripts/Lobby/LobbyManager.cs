@@ -94,12 +94,13 @@ public class LobbyManager : MonoBehaviour
             Debug.Log("로비 생성 성공: " + currentLobby.Id);
 
             // 하트비트(유지) 시작
-            heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(currentLobby.Id));
+            // heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(currentLobby.Id));
 
             joinLobbyEvent?.Invoke(currentLobby);
+            await RefreshLobbyList();
+            Debug.Log("Game Scene 이동");
             PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
             SceneManager.LoadScene("Game");
-            //await RefreshLobbyList();
         }
         catch (LobbyServiceException e)
         {
