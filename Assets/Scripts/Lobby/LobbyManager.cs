@@ -48,7 +48,6 @@ public class LobbyManager : MonoBehaviour
     // 1️⃣ Unity Gaming Services 초기화
     public async Task InitializeUnityServices(string playername)
     {
-        Debug.Log("로그인 시도중");
         try
         {
             await UnityServices.InitializeAsync();
@@ -62,7 +61,6 @@ public class LobbyManager : MonoBehaviour
             Debug.LogError(e);
         }
 
-        Debug.Log("로그인 완료: " + playerName);
         OnEnterdLobby?.Invoke(true);
         //StartCoroutine(UpdateLobbyListCoroutine());
         await RefreshLobbyList();
@@ -91,14 +89,12 @@ public class LobbyManager : MonoBehaviour
             };
 
             currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-            Debug.Log("로비 생성 성공: " + currentLobby.Id);
 
             // 하트비트(유지) 시작
             // heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(currentLobby.Id));
 
             joinLobbyEvent?.Invoke(currentLobby);
             await RefreshLobbyList();
-            Debug.Log("Game Scene 이동");
             PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
             SceneManager.LoadScene("Game");
         }
@@ -109,11 +105,11 @@ public class LobbyManager : MonoBehaviour
     }
 
     // 3️⃣ 로비 검색 후 참여
-    public async Task<Lobby> JoinLobbyByCode(string lobbyCode)
+    public async Task JoinLobbyByCode(string lobbyCode)
     {
         try
         {
-            JoinLobbyByCodeOptions options = new JoinLobbyByCodeOptions
+            JoinLobbyByIdOptions options = new JoinLobbyByIdOptions
             {
                 Player = new Player
                 (
@@ -125,14 +121,13 @@ public class LobbyManager : MonoBehaviour
                 )
             };
 
-            currentLobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, options);
-            Debug.Log("로비 참가 성공: " + currentLobby.Id);
-            return currentLobby;
+            currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyCode, options);
+            PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
+            SceneManager.LoadScene("Game");
         }
         catch (LobbyServiceException e)
         {
             Debug.LogError("로비 참가 실패: " + e.Message);
-            return null;
         }
     }
     
@@ -169,7 +164,6 @@ public class LobbyManager : MonoBehaviour
             };
 
             QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync(options);
-            Debug.Log($"검색된 로비 수: {response.Results.Count}");
 
             return response.Results;
         }

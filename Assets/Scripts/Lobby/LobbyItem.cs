@@ -1,4 +1,5 @@
 using System;
+using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,6 @@ public class LobbyItem : MonoBehaviour
 
     public void Initialise(Lobby lobby)
     {
-        Debug.LogError("이름 : " + lobby.Name);
         this.lobby = lobby;
 
         lobbyname_txt.text = this.lobby.Name;

@@ -2,7 +2,18 @@ using Unity.Services.Lobbies.Models;
 
 public class PlayerSession
 {
-    public static PlayerSession Instance { get; private set; }
+    private static PlayerSession instance = null;
+
+    public static PlayerSession Instance
+    {
+        get
+        {
+            if (instance == null)
+                instance = new PlayerSession();
+            return instance;
+        }
+        private set { }
+    }
 
     public string PlayerId { get; private set; }
     public string PlayerName { get; private set; }

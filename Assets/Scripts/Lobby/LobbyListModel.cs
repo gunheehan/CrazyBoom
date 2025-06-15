@@ -55,6 +55,7 @@ public class LobbyListModel
     
     public async void JoinAsync(string lobbyid)
     {
+        Debug.Log("Join State : " + isJoin);
         if (isJoin)
             return;
 
@@ -69,5 +70,7 @@ public class LobbyListModel
             isJoin = false;
             throw;
         }
+
+        isJoin = false;
     }
 }
