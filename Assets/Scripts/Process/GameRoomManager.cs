@@ -25,6 +25,10 @@ public class GameRoomManager : MonoBehaviour
         string hostId = PlayerSession.Instance.CurrentLobby.HostId;
         string myId = AuthenticationService.Instance.PlayerId;
 
+        lastKnownHostId = hostId;
+
+        Debug.Log("Init Host ID : " + lastKnownHostId);
+        Debug.Log("Init My ID : " + myId);
         if(hostId == myId)
             StartCoroutine(HeartbeatLobbyCoroutine(PlayerSession.Instance.CurrentLobby.Id));
     }
@@ -46,19 +50,30 @@ public class GameRoomManager : MonoBehaviour
 
         callbacks.LobbyChanged += lobby =>
         {
-            string currentHostId = lobby.HostId.ToString();
-
-            if (currentHostId != lastKnownHostId)
+            Debug.Log("로비 변경 감지");
+            
+            if (lobby.HostId.Changed)
             {
                 Debug.Log("호스트 변경 감지!");
+                Debug.Log("Change Host ID : " + lobby.HostId.Value);
+                Debug.Log("current My ID : " + AuthenticationService.Instance.PlayerId);
 
-                if (currentHostId == PlayerSession.Instance.PlayerId)
+                if (lobby.HostId.Value == PlayerSession.Instance.PlayerId)
                 {
                     Debug.Log("호스트 권한 위임 받음. 하트비트 시작");
-                    StartCoroutine(HeartbeatLobbyCoroutine(currentHostId));
+                    StartCoroutine(HeartbeatLobbyCoroutine(lobby.HostId.Value));
                 }
 
-                lastKnownHostId = currentHostId;
+                lastKnownHostId = lobby.HostId.Value;
+            }
+            
+            if (lobby.PlayerJoined.Changed)
+            {
+                foreach (LobbyPlayerJoined joinedPlayer in lobby.PlayerJoined.Value)
+                {
+                    Debug.Log($"플레이어 추가됨: {joinedPlayer.Player.Profile.Name}");
+                    OnEnteredPlayer?.Invoke(joinedPlayer.Player);
+                }
             }
         };
 
@@ -130,5 +145,16 @@ public class GameRoomManager : MonoBehaviour
         
         PlayerSession.Instance.UpdateLobby(newLobby);
     }
-
+    private void DetectLobbyChanges(ILobbyChanges changes)
+    {
+        // 플레이어가 추가된 경우
+        if (changes.PlayerJoined.Changed)
+        {
+            foreach (LobbyPlayerJoined joinedPlayer in changes.PlayerJoined.Value)
+            {
+                Debug.Log($"플레이어 추가됨: {joinedPlayer.Player.Profile.Name}");
+                OnEnteredPlayer?.Invoke(joinedPlayer.Player);
+            }
+        }
+    }
 }
