@@ -13,8 +13,10 @@ public class GameRoomManager : MonoBehaviour
     public Action<Player, string, string> OnChangedPlayerState = null;
     public Action<string> OnChangedHost = null;
     public Action<string, string> OnLobbyStateChaged = null;
+
+    private GameLobby gameLobby;
     
-    void Start()
+    private void Start()
     {
         CheckRoomHost();
         SubscribeToLobbyChanges();
@@ -41,6 +43,8 @@ public class GameRoomManager : MonoBehaviour
             yield return new WaitForSeconds(15);
         }
     }
+    private LobbyEventCallbacks _callbacks;
+    private bool _isSubscribed = false;
     
     private string lastKnownHostId;
 
@@ -67,11 +71,11 @@ public class GameRoomManager : MonoBehaviour
                 lastKnownHostId = lobby.HostId.Value;
             }
             
-            if (lobby.PlayerJoined.Changed)
+            if (lobby.PlayerJoined.Added)
             {
                 foreach (LobbyPlayerJoined joinedPlayer in lobby.PlayerJoined.Value)
                 {
-                    Debug.Log($"플레이어 추가됨: {joinedPlayer.Player.Profile.Name}");
+                    Debug.Log($"플레이어 추가됨: {joinedPlayer.Player.Data["nickname"].Value}");
                     OnEnteredPlayer?.Invoke(joinedPlayer.Player);
                 }
             }
