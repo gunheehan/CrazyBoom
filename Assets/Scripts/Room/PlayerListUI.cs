@@ -23,7 +23,7 @@ public class PlayerListUI : MonoBehaviour
     public void UpdateUI(List<Player> players)
     {
         ClearList();
-Debug.Log("플레이어 리스트 업데이트");
+
         foreach (Player player in players)
         {
             PlayerDataItem newItem = GetItem();
@@ -35,6 +35,18 @@ Debug.Log("플레이어 리스트 업데이트");
             Debug.Log($"플레이어 ID: {player.Id}, 닉네임: {nickname}");
             newItem.SetPlayerItem(nickname);
         }
+    }
+
+    public void AddListUI(Player player)
+    {
+        PlayerDataItem newItem = GetItem();
+            
+        string nickname = player.Data != null && player.Data.ContainsKey("nickname")
+            ? player.Data["nickname"].Value
+            : "(이름 없음)";
+    
+        Debug.Log($"플레이어 ID: {player.Id}, 닉네임: {nickname}");
+        newItem.SetPlayerItem(nickname);
     }
 
     private PlayerDataItem GetItem()
