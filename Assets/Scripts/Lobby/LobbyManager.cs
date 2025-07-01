@@ -11,11 +11,8 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    public event Action<bool> OnEnterdLobby;
-    public event Action<List<Lobby>> OnLobbyListUpdated; // 로비 목록이 업데이트될 때 호출될 콜백
-    public event Action<Lobby> joinLobbyEvent;
-    public event Action leaveLobbyEvent;
-
+    [SerializeField] private LobbyUIEventBridge lobbyUIEventBridge;
+    public event Action<bool> OnConnectedServer = null;
     private static LobbyManager instance;
     public static LobbyManager Instance
     {
@@ -27,7 +24,8 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    private Lobby currentLobby;
+    //private Lobby currentLobby;
+    private LocalLobby localLobby;
     private Coroutine heartbeatCoroutine;
     private string playerId;
     private string playerName;
@@ -61,9 +59,7 @@ public class LobbyManager : MonoBehaviour
             Debug.LogError(e);
         }
 
-        OnEnterdLobby?.Invoke(true);
-        //StartCoroutine(UpdateLobbyListCoroutine());
-        await RefreshLobbyList();
+        OnConnectedServer?.Invoke(true);
     }
 
     // 2️⃣ 로비 생성
@@ -88,13 +84,11 @@ public class LobbyManager : MonoBehaviour
                 }
             };
 
-            currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-
-            // 하트비트(유지) 시작
-            // heartbeatCoroutine = StartCoroutine(HeartbeatLobbyCoroutine(currentLobby.Id));
-
-            joinLobbyEvent?.Invoke(currentLobby);
-            await RefreshLobbyList();
+            var currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
+            localLobby = new LocalLobby(currentLobby);
+            lobbyUIEventBridge.SetUIEvent(localLobby);
+            await localLobby.RefreshLobbyList();
+            
             PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
             SceneManager.LoadScene("Game");
         }
@@ -121,104 +115,16 @@ public class LobbyManager : MonoBehaviour
                 )
             };
 
-            currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyCode, options);
+            var currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyCode, options);
+            localLobby = new LocalLobby(currentLobby);
+            lobbyUIEventBridge.SetUIEvent(localLobby);
+            
             PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
             SceneManager.LoadScene("Game");
         }
         catch (LobbyServiceException e)
         {
             Debug.LogError("로비 참가 실패: " + e.Message);
-        }
-    }
-    
-    public async void LeaveLobby()
-    {
-        if(currentLobby == null) return;
-
-        try
-        {
-            MigrateHost();
-            await LobbyService.Instance.RemovePlayerAsync(currentLobby.Id, AuthenticationService.Instance.PlayerId);
-            currentLobby = null;
-
-            leaveLobbyEvent?.Invoke();
-            await RefreshLobbyList();
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.Log($"{e}");
-        }
-    }
-
-    // 4️⃣ 공개된 로비 목록 검색
-    public async Task<List<Lobby>> QueryLobbies()
-    {
-        try
-        {
-            QueryLobbiesOptions options = new QueryLobbiesOptions
-            {
-                Filters = new List<QueryFilter>
-                {
-                    new QueryFilter(QueryFilter.FieldOptions.AvailableSlots, "0", QueryFilter.OpOptions.GT)
-                }
-            };
-
-            QueryResponse response = await LobbyService.Instance.QueryLobbiesAsync(options);
-
-            return response.Results;
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.LogError("로비 검색 실패: " + e.Message);
-            return new List<Lobby>();
-        }
-    }
-    
-    // 🔹 일정 시간마다 로비 목록을 갱신 (5초마다)
-    private IEnumerator UpdateLobbyListCoroutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(5);
-            RefreshLobbyList();
-        }
-    }
-
-    // 🔹 로비 목록 새로고침 함수
-    public async Task RefreshLobbyList()
-    {
-        Debug.Log("로비 리스트 업데이트");
-        List<Lobby> lobbies = await QueryLobbies();
-        OnLobbyListUpdated?.Invoke(lobbies); // UI 업데이트를 위해 이벤트 호출
-    }
-
-    // 5️⃣ 로비 유지 (하트비트)
-    private IEnumerator HeartbeatLobbyCoroutine(string lobbyId)
-    {
-        while (true)
-        {
-            LobbyService.Instance.SendHeartbeatPingAsync(lobbyId);
-            yield return new WaitForSeconds(15);
-        }
-    }
-    
-    private bool IsLobbyhost()
-    {
-        return currentLobby != null && currentLobby.HostId == AuthenticationService.Instance.PlayerId;
-    }
-    
-    private async void MigrateHost()
-    {
-        if(!IsLobbyhost() || currentLobby.Players.Count <= 1)  return;
-        try
-        {
-            currentLobby = await LobbyService.Instance.UpdateLobbyAsync(currentLobby.Id, new UpdateLobbyOptions{
-                HostId = currentLobby.Players[1].Id
-            });
-        }
-        catch (LobbyServiceException e)
-        {
-            Debug.Log($"{e}");
         }
     }
 }
