@@ -55,20 +55,6 @@ public class NetworkManagerUI : MonoBehaviour
         Debug.Log($"서버에 접속 시도: {serverIP}:{serverPort}");
     }
 
-    private async void StartClient()
-    {
-        List<Unity.Services.Lobbies.Models.Lobby> lobbies = await LobbyManager.Instance.QueryLobbies();
-
-        string lobbyListText = string.Empty;
-        foreach (var lobby in lobbies)
-        {
-            lobbyListText += $"{lobby.Name} - {lobby.MaxPlayers}명 (현재 {lobby.Players.Count}명)\n";
-        }
-        
-        Debug.Log(lobbyListText);
-        //await ClientManager.instance.StartClient("테스트");
-    }
-
     private async void CreateLobby()
     {
         await LobbyManager.Instance.CreateLobby("test", 4);

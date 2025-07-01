@@ -18,12 +18,12 @@ public class LoginUI : MonoBehaviour
 
     private void OnEnable()
     {
-        LobbyManager.Instance.OnEnterdLobby += OnEnterdLobby;
+        LobbyManager.Instance.OnConnectedServer += OnConnectedServer;
     }
 
     private void OnDisable()
     {
-        LobbyManager.Instance.OnEnterdLobby -= OnEnterdLobby;
+        LobbyManager.Instance.OnConnectedServer -= OnConnectedServer;
     }
 
     private void OnclickLogin()
@@ -39,7 +39,7 @@ public class LoginUI : MonoBehaviour
         LobbyManager.Instance.InitializeUnityServices(playerName_inputfield.text);
     }
 
-    private void OnEnterdLobby(bool isEnter)
+    private void OnConnectedServer(bool isEnter)
     {
         gameObject.SetActive(!isEnter);
     }
