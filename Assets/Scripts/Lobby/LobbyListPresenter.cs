@@ -1,5 +1,3 @@
-using System;
-using Unity.Services.Lobbies.Models;
 using UnityEngine;
 
 public class LobbyListPresenter : MonoBehaviour, ILobbyUI
@@ -8,27 +6,11 @@ public class LobbyListPresenter : MonoBehaviour, ILobbyUI
 
     private LobbyListModel model = new LobbyListModel();
 
-    private void OnConnectedServer(bool isEnter)
-    {
-        ui.gameObject.SetActive(isEnter);
-        model.RefreshLobbyList();
-    }
-
-    private void Start()
-    {
-        LobbyManager.Instance.OnConnectedServer += OnConnectedServer;
-    }
-
-    private void OnDestroy()
-    {
-        LobbyManager.Instance.OnConnectedServer -= OnConnectedServer;
-    }
-
     public void SubScrive(LocalLobby localLobby)
     {
         localLobby.LobbyListUpdateEvent += model.UpdateLobbyList;
         ui.OnClickJoinLobby += model.JoinAsync;
-        // ui.OnClickUpdateList += () => LobbyManager.Instance.RefreshLobbyList();
+        ui.OnClickUpdateList += model.RefreshLobby;
         model.OnUpdateLobbyList += ui.UpdateList;
     }
 
@@ -36,7 +18,7 @@ public class LobbyListPresenter : MonoBehaviour, ILobbyUI
     {
         localLobby.LobbyListUpdateEvent -= model.UpdateLobbyList;
         ui.OnClickJoinLobby -= model.JoinAsync;
-        // ui.OnClickUpdateList -= () => LobbyManager.Instance.RefreshLobbyList();
+        ui.OnClickUpdateList -= model.RefreshLobby;
         model.OnUpdateLobbyList -= ui.UpdateList;
     }
 }

@@ -4,7 +4,6 @@ using Unity.Services.Core;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
@@ -12,7 +11,6 @@ using UnityEngine.SceneManagement;
 public class LobbyManager : MonoBehaviour
 {
     [SerializeField] private LobbyUIEventBridge lobbyUIEventBridge;
-    public event Action<bool> OnConnectedServer = null;
     private static LobbyManager instance;
     public static LobbyManager Instance
     {
@@ -24,7 +22,6 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    //private Lobby currentLobby;
     private LocalLobby localLobby;
     private Coroutine heartbeatCoroutine;
     private string playerId;
@@ -41,25 +38,6 @@ public class LobbyManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    // 1️⃣ Unity Gaming Services 초기화
-    public async Task InitializeUnityServices(string playername)
-    {
-        try
-        {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-            playerId = AuthenticationService.Instance.PlayerId;
-            playerName = playername;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-        }
-
-        OnConnectedServer?.Invoke(true);
     }
 
     // 2️⃣ 로비 생성
@@ -89,7 +67,7 @@ public class LobbyManager : MonoBehaviour
             lobbyUIEventBridge.SetUIEvent(localLobby);
             await localLobby.RefreshLobbyList();
             
-            PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
+            PlayerSession.Instance.SetCurrentLobby(currentLobby);
             SceneManager.LoadScene("Game");
         }
         catch (LobbyServiceException e)
@@ -119,7 +97,7 @@ public class LobbyManager : MonoBehaviour
             localLobby = new LocalLobby(currentLobby);
             lobbyUIEventBridge.SetUIEvent(localLobby);
             
-            PlayerSession.Instance.Initialize(playerId, playerName, currentLobby);
+            PlayerSession.Instance.SetCurrentLobby(currentLobby);
             SceneManager.LoadScene("Game");
         }
         catch (LobbyServiceException e)
