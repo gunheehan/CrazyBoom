@@ -19,10 +19,14 @@ public class PlayerSession
     public string PlayerName { get; private set; }
     public Lobby CurrentLobby { get; private set; }
 
-    public void Initialize(string playerId, string playerName, Lobby lobby)
+    public void Initialize(string playerId, string playerName)
     {
         PlayerId = playerId;
         PlayerName = playerName;
+    }
+
+    public void SetCurrentLobby(Lobby lobby)
+    {
         CurrentLobby = lobby;
     }
 
