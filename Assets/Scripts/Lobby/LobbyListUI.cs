@@ -6,19 +6,33 @@ using UnityEngine.UI;
 
 public class LobbyListUI : MonoBehaviour
 {
-    public event Action<string> OnClickJoinLobby = null;
-    public event Action OnClickUpdateList = null;
+    public event Action<string> OnClickJoinLobby;
+    public event Action OnClickUpdateList;
+
+    [SerializeField] private Button updateButton;
     [SerializeField] private LobbyItem lobbyitemPrefab;
     [SerializeField] private Transform lobbyitemParent;
-    [SerializeField] private Button listUpdate_button;
 
     private List<LobbyItem> lobbyItemList = new List<LobbyItem>();
     private Stack<LobbyItem> lobbyItemPool = new Stack<LobbyItem>();
+    
+    private LobbyListPresenter presenter;
 
     private void Start()
     {
-        listUpdate_button?.onClick.AddListener(OnClickUpdate);
+        // UI 버튼에 Unity 이벤트 바인딩
+        updateButton.onClick.AddListener(() => OnClickUpdateList?.Invoke());
+
+        // Presenter 생성
+        var model = new LobbyListModel();
+        presenter = new LobbyListPresenter(this, model);
     }
+
+    private void OnDestroy()
+    {
+        presenter?.Dispose(); // 구독 해제
+    }
+    
     private void ClearLobbyItems()
     {
         foreach (LobbyItem item in lobbyItemList)
@@ -29,11 +43,6 @@ public class LobbyListUI : MonoBehaviour
         }
 
         lobbyItemList.Clear();
-    }
-
-    private void OnClickUpdate()
-    {
-        OnClickUpdateList?.Invoke();
     }
     
     public void UpdateList(List<Lobby> datalist)

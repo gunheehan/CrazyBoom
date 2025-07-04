@@ -1,24 +1,28 @@
-using UnityEngine;
-
-public class LobbyListPresenter : MonoBehaviour, ILobbyUI
+public class LobbyListPresenter
 {
-    [SerializeField] private LobbyListUI ui;
+    private readonly LobbyListUI _view;
+    private readonly LobbyListModel _model;
 
-    private LobbyListModel model = new LobbyListModel();
-
-    public void SubScrive(LocalLobby localLobby)
+    public LobbyListPresenter(LobbyListUI view, LobbyListModel model)
     {
-        localLobby.LobbyListUpdateEvent += model.UpdateLobbyList;
-        ui.OnClickJoinLobby += model.JoinAsync;
-        ui.OnClickUpdateList += model.RefreshLobby;
-        model.OnUpdateLobbyList += ui.UpdateList;
+        _view = view;
+        _model = model;
+
+        // View 이벤트 구독
+        _view.OnClickUpdateList += RefreshLobby;
+        _view.OnClickJoinLobby += JoinLobby;
+
+        // Model 이벤트 구독
+        _model.OnUpdateLobbyList += _view.UpdateList;
     }
 
-    public void DisSubScrive(LocalLobby localLobby)
+    public void RefreshLobby() => _model.RefreshLobby();
+    public void JoinLobby(string id) => _model.JoinAsync(id);
+
+    public void Dispose()
     {
-        localLobby.LobbyListUpdateEvent -= model.UpdateLobbyList;
-        ui.OnClickJoinLobby -= model.JoinAsync;
-        ui.OnClickUpdateList -= model.RefreshLobby;
-        model.OnUpdateLobbyList -= ui.UpdateList;
+        _view.OnClickUpdateList -= RefreshLobby;
+        _view.OnClickJoinLobby -= JoinLobby;
+        _model.OnUpdateLobbyList -= _view.UpdateList;
     }
 }
