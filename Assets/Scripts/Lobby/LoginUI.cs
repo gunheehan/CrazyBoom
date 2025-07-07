@@ -40,11 +40,6 @@ public class LoginUI : MonoBehaviour
 
         InitializeUnityServices(playerName_inputfield.text);
     }
-
-    private void OnConnectedServer(bool isEnter)
-    {
-        gameObject.SetActive(!isEnter);
-    }
     
     // 1️⃣ Unity Gaming Services 초기화
     public async Task InitializeUnityServices(string playername)

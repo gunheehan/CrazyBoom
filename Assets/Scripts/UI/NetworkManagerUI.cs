@@ -22,7 +22,6 @@ public class NetworkManagerUI : MonoBehaviour
         // });
         
         //startClient_btn.onClick.AddListener(ConnectToServer);
-        createlobby.onClick.AddListener(CreateLobby);
         NetworkManager.Singleton.OnClientConnectedCallback += (clientId) =>
         {
             Debug.Log($"서버에서 클라이언트 {clientId} 접속 확인");
@@ -53,11 +52,6 @@ public class NetworkManagerUI : MonoBehaviour
         NetworkManager.Singleton.StartClient();
 
         Debug.Log($"서버에 접속 시도: {serverIP}:{serverPort}");
-    }
-
-    private async void CreateLobby()
-    {
-        await LobbyManager.Instance.CreateLobby("test", 4);
     }
     
     private async void EnterLobby()
