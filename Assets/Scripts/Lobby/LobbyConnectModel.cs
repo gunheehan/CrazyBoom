@@ -1,42 +1,12 @@
-using UnityEngine;
-using Unity.Services.Lobbies;
-using Unity.Services.Lobbies.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyConnectModel
 {
-    private static LobbyManager instance;
-    public static LobbyManager Instance
-    {
-        get
-        {
-            if (instance == null)
-                instance = new LobbyManager();
-            return instance;
-        }
-    }
-
-    private LocalLobby localLobby;
-    private Coroutine heartbeatCoroutine;
-    private string playerId;
-    private string playerName;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    // 2️⃣ 로비 생성
     public async Task CreateLobby(string lobbyName, int maxPlayers)
     {
         try
@@ -46,10 +16,10 @@ public class LobbyManager : MonoBehaviour
                 IsPrivate = false,
                 Player = new Player
                 (
-                    id: playerId,
+                    id: PlayerSession.Instance.PlayerId,
                     data: new Dictionary<string, PlayerDataObject>
                     {
-                        { "nickname", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                        { "nickname", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, PlayerSession.Instance.PlayerName) }
                     }
                 ),
                 Data = new Dictionary<string, DataObject>
@@ -59,8 +29,6 @@ public class LobbyManager : MonoBehaviour
             };
 
             var currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
-            localLobby = new LocalLobby(currentLobby);
-            await localLobby.RefreshLobbyList();
             
             PlayerSession.Instance.SetCurrentLobby(currentLobby);
             SceneManager.LoadScene("Game");
@@ -70,8 +38,7 @@ public class LobbyManager : MonoBehaviour
             Debug.LogError("로비 생성 실패: " + e.Message);
         }
     }
-
-    // 3️⃣ 로비 검색 후 참여
+    
     public async Task JoinLobbyByCode(string lobbyCode)
     {
         try
@@ -80,16 +47,15 @@ public class LobbyManager : MonoBehaviour
             {
                 Player = new Player
                 (
-                    id: playerId,
+                    id: PlayerSession.Instance.PlayerId,
                     data: new Dictionary<string, PlayerDataObject>
                     {
-                        { "nickname", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, playerName) }
+                        { "nickname", new PlayerDataObject(PlayerDataObject.VisibilityOptions.Member, PlayerSession.Instance.PlayerName) }
                     }
                 )
             };
 
             var currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyCode, options);
-            localLobby = new LocalLobby(currentLobby);
             
             PlayerSession.Instance.SetCurrentLobby(currentLobby);
             SceneManager.LoadScene("Game");

@@ -14,11 +14,6 @@ public class LobbyListModel
         OnUpdateLobbyList?.Invoke(result);
     }
 
-    public async void JoinAsync(string lobbyId)
-    {
-        await LobbyManager.Instance.JoinLobbyByCode(lobbyId);
-    }
-
     private async Task<List<Lobby>> QueryLobbies()
     {
         var options = new QueryLobbiesOptions

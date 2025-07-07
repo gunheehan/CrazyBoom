@@ -378,6 +378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 555c860286c73412bbd75e775f7479d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobbyname_inputfield: {fileID: 1634076293}
+  lobbymenber_inputfield: {fileID: 1744251496}
+  createButton: {fileID: 934130988}
   updateButton: {fileID: 1365810419}
   lobbyitemPrefab: {fileID: 1905407773}
   lobbyitemParent: {fileID: 1490795613}
@@ -1779,6 +1782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1030823741}
+  - component: {fileID: 1030823742}
   - component: {fileID: 1030823740}
   - component: {fileID: 1030823739}
   - component: {fileID: 1030823738}
@@ -1875,6 +1879,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1030823742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030823737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbb6af7ea36754463a7200e386270e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyUI: {fileID: 231765046}
 --- !u!1 &1047864940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,7 +2259,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235823081}
-  - component: {fileID: 1235823084}
   - component: {fileID: 1235823085}
   - component: {fileID: 1235823080}
   - component: {fileID: 1235823083}
@@ -2340,19 +2356,6 @@ MonoBehaviour:
     PacketDelayMS: 0
     PacketJitterMS: 0
     PacketDropRate: 0
---- !u!114 &1235823084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235823079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a6144393933b4aa0ad292a177bdcca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lobbyUIEventBridge: {fileID: 0}
 --- !u!114 &1235823085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2376,7 +2379,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1291636505}
-  - component: {fileID: 1291636507}
   - component: {fileID: 1291636506}
   m_Layer: 5
   m_Name: CreateLooby
@@ -2435,21 +2437,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1291636507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291636504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 361c47a9efdac4f978ce7dd3c8cbf5fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lobbyname_inputfield: {fileID: 1634076293}
-  lobbymenber_inputfield: {fileID: 1744251496}
-  create_button: {fileID: 934130988}
 --- !u!1 &1327831272
 GameObject:
   m_ObjectHideFlags: 0
@@ -3069,7 +3056,7 @@ GameObject:
   - component: {fileID: 1581119737}
   - component: {fileID: 1581119736}
   m_Layer: 5
-  m_Name: LobbyListUI
+  m_Name: Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
