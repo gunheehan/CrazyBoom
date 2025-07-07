@@ -20,17 +20,15 @@ public class LobbyListUI : MonoBehaviour
 
     private void Start()
     {
-        // UI 버튼에 Unity 이벤트 바인딩
         updateButton.onClick.AddListener(() => OnClickUpdateList?.Invoke());
 
-        // Presenter 생성
         var model = new LobbyListModel();
         presenter = new LobbyListPresenter(this, model);
     }
 
     private void OnDestroy()
     {
-        presenter?.Dispose(); // 구독 해제
+        presenter?.Dispose();
     }
     
     private void ClearLobbyItems()

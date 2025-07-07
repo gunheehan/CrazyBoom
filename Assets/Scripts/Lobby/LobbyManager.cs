@@ -1,7 +1,4 @@
-using System;
 using UnityEngine;
-using Unity.Services.Core;
-using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using System.Collections.Generic;
@@ -10,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
-    [SerializeField] private LobbyUIEventBridge lobbyUIEventBridge;
     private static LobbyManager instance;
     public static LobbyManager Instance
     {
@@ -64,7 +60,6 @@ public class LobbyManager : MonoBehaviour
 
             var currentLobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
             localLobby = new LocalLobby(currentLobby);
-            lobbyUIEventBridge.SetUIEvent(localLobby);
             await localLobby.RefreshLobbyList();
             
             PlayerSession.Instance.SetCurrentLobby(currentLobby);
@@ -95,7 +90,6 @@ public class LobbyManager : MonoBehaviour
 
             var currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyCode, options);
             localLobby = new LocalLobby(currentLobby);
-            lobbyUIEventBridge.SetUIEvent(localLobby);
             
             PlayerSession.Instance.SetCurrentLobby(currentLobby);
             SceneManager.LoadScene("Game");
