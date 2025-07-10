@@ -11,15 +11,22 @@ public class PlayerListPresenter : IPresenter
     }
     public void Subscribe()
     {
-        //roommanager.OnEnteredPlayer += model.OnAddPlayer;
+        GameRoomManager.Instance.PlayerJoined += _model.OnAddPlayer;
         _model.UpdateListUI += _view.UpdateUI;
         _model.AddListUI += _view.AddListUI;
+
+        Initialize();
     }
 
     public void UnSubscribe()
     {
-        //roommanager.OnEnteredPlayer -= model.OnAddPlayer;
+        GameRoomManager.Instance.PlayerJoined -= _model.OnAddPlayer;
         _model.UpdateListUI -= _view.UpdateUI;
         _model.AddListUI -= _view.AddListUI;
+    }
+
+    private void Initialize()
+    {
+        _model.OnUpdatePlayerList(PlayerSession.Instance.CurrentLobby);
     }
 }

@@ -1,19 +1,19 @@
 using System;
-using UnityEngine;
+using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using UnityEngine;
 
-public class GameRoomManager : MonoBehaviour
+public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
 {
     public static GameRoomManager Instance { get; private set; }
 
-    public event Action<Player> OnPlayerJoined;
-    public event Action<string> OnPlayerLeft;
-    public event Action<Player, string, string> OnPlayerStateChanged;
-    public event Action<string> OnHostChanged;
-
     private Lobby currentLobby;
     private GameEventListener listener;
-    private GameStateTracker stateTracker;
+
+    public event Action<Player> PlayerJoined;
+    public event Action<string> PlayerLeft;
+    public event Action<Player, string, string> PlayerStateChanged;
+    public event Action<string> HostChanged;
 
     private void Awake()
     {
@@ -22,52 +22,69 @@ public class GameRoomManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        Initialize(PlayerSession.Instance.CurrentLobby);
+    }
+
+    private void OnDestroy()
+    {
+        ResetEvents();
     }
 
     public async void Initialize(Lobby lobby)
     {
         currentLobby = lobby;
-        stateTracker = new GameStateTracker(lobby);
         listener = new GameEventListener();
+        listener.OnLobbyChanged += HandleLobbyChanged;
 
-        //listener.OnLobbyChanged += HandleLobbyChanged;
         await listener.StartListening(lobby.Id);
     }
 
-    private void HandleLobbyChanged(LobbyChanges changes)
+    private void HandleLobbyChanged(ILobbyChanges changes)
     {
+        Console.WriteLine("Room Property Changes");
         var oldLobby = currentLobby;
-        currentLobby = stateTracker.Apply(changes);
 
-        // if (changes.PlayerJoined.Changed)
-        // {
-        //     foreach (var player in changes.PlayerJoined)
-        //         OnPlayerJoined?.Invoke(player.Player);
-        // }
+        if (changes.PlayerJoined.Changed)
+        {
+            foreach (var p in changes.PlayerJoined.Value)
+                PlayerJoined?.Invoke(p.Player);
+        }
 
         if (changes.HostId.Changed)
         {
-            OnHostChanged?.Invoke(changes.HostId.ToString());
+            HostChanged?.Invoke(changes.HostId.ToString());
         }
 
         foreach (var player in currentLobby.Players)
         {
             var oldPlayer = oldLobby.Players.Find(p => p.Id == player.Id);
-            if (oldPlayer != null)
+            if (oldPlayer == null) continue;
+
+            foreach (var kvp in player.Data)
             {
-                foreach (var kvp in player.Data)
+                if (oldPlayer.Data.TryGetValue(kvp.Key, out var oldVal))
                 {
-                    if (oldPlayer.Data.TryGetValue(kvp.Key, out var oldVal))
+                    if (oldVal.Value != kvp.Value.Value)
                     {
-                        if (oldVal.Value != kvp.Value.Value)
-                        {
-                            OnPlayerStateChanged?.Invoke(player, kvp.Key, kvp.Value.Value);
-                        }
+                        PlayerStateChanged?.Invoke(player, kvp.Key, kvp.Value.Value);
                     }
                 }
             }
         }
+    }
+
+    public void ResetEvents()
+    {
+        PlayerJoined = null;
+        PlayerLeft = null;
+        PlayerStateChanged = null;
+        HostChanged = null;
     }
 }
