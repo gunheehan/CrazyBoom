@@ -2,15 +2,18 @@
 This project is Crazy Arcade Game Mockup
 
 #Implementation Technology
- - Muilti Play
+ - Muilti Player
  - Game System
 
 Develop List
  - Player
-   - Contoller(Mobile Joystick)
-   - Buff
+   - ~~Contoller(Mobile Joystick)~~
+   - ~~Buff~~
+   - Player Property(Local)
+   - Player Property(Network)
+   - Avatar Manager
  - Match System
-   - Photon Connection
+   - ~~Unity Multiplayer Lobby~~
  - Game Life Cycle
    - Ready
    - Play
@@ -18,9 +21,11 @@ Develop List
  - Item
    - Player Item
      - niddle
-     - Buff Iteem(Avatar Upgrade ex. balloon number, speed, power)
+     - Buff Item(Avatar Upgrade ex. balloon number, speed, power)
+     - Player Item Property(Network)
    - Game Item
-     - Water Balloon
+     - ~~Water Balloon~~
+     - Water Balloon(Network)
  - Particle
 
 개발 우선순위
@@ -32,10 +37,10 @@ Develop List
  - 장애물(벽 오브젝트)
    - 1회성 장애물(피격 1회)
    - 2~3회성 장애물(피격 3회)
-   - 숨기 장애물(ex. 풀숲)
  - 피격
    - 플레이어 피격
    - 장애물 피격
      - Randonm Item Drop
- - Photon
+ - Game Match System
+ - Game Room Property Controller
  - Game Life Cycle
