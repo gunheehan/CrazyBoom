@@ -14,6 +14,7 @@ Develop List
    - Avatar Manager
  - Match System
    - ~~Unity Multiplayer Lobby~~
+   - Chatting System
  - Game Life Cycle
    - Ready
    - Play
