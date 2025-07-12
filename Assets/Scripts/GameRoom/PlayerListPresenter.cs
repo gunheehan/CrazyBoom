@@ -12,8 +12,10 @@ public class PlayerListPresenter : IPresenter
     public void Subscribe()
     {
         GameRoomManager.Instance.PlayerJoined += _model.OnAddPlayer;
+        GameRoomManager.Instance.PlayerStateChanged += _model.OnPlayerStateChanged;
         _model.UpdateListUI += _view.UpdateUI;
         _model.AddListUI += _view.AddListUI;
+        _model.ChangeReadyState += _view.UpdatePlayerState;
 
         Initialize();
     }
@@ -21,8 +23,10 @@ public class PlayerListPresenter : IPresenter
     public void UnSubscribe()
     {
         GameRoomManager.Instance.PlayerJoined -= _model.OnAddPlayer;
+        GameRoomManager.Instance.PlayerStateChanged -= _model.OnPlayerStateChanged;
         _model.UpdateListUI -= _view.UpdateUI;
         _model.AddListUI -= _view.AddListUI;
+        _model.ChangeReadyState -= _view.UpdatePlayerState;
     }
 
     private void Initialize()

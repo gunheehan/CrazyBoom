@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
 {
     public static GameRoomManager Instance { get; private set; }
-
+    
     private Lobby currentLobby;
+    private List<Player> currentPlayers;
     private GameEventListener listener;
 
     public event Action<Player> PlayerJoined;
@@ -49,7 +53,6 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
     private void HandleLobbyChanged(ILobbyChanges changes)
     {
         Console.WriteLine("Room Property Changes");
-        var oldLobby = currentLobby;
 
         if (changes.PlayerJoined.Changed)
         {
@@ -62,24 +65,63 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
             HostChanged?.Invoke(changes.HostId.ToString());
         }
 
-        foreach (var player in currentLobby.Players)
+        if (changes.PlayerData.Changed)
         {
-            var oldPlayer = oldLobby.Players.Find(p => p.Id == player.Id);
-            if (oldPlayer == null) continue;
-
-            foreach (var kvp in player.Data)
+            for (int i = 0; i < changes.PlayerData.Value.Count; i++)
             {
-                if (oldPlayer.Data.TryGetValue(kvp.Key, out var oldVal))
+                if(changes.PlayerData.Value[i] == null) continue;
+
+                var newPlayerData = changes.PlayerData.Value[i].ChangedData;
+                Debug.Log(currentLobby.Players.Count);
+                var player = currentLobby.Players[changes.PlayerData.Value[i].PlayerIndex]; // 동일 인덱스의 플레이어
+
+                if (!newPlayerData.Changed) continue;
+                foreach (var kvp in newPlayerData.Value)
                 {
-                    if (oldVal.Value != kvp.Value.Value)
+                    string key = kvp.Key;
+                    string newValue = kvp.Value.Value.Value;
+
+                    Debug.Log(newValue);
+
+                    // 이전 상태가 있다면 비교
+                    var oldPlayer = currentPlayers?.Find(p => p.Id == player.Id);
+                    if (oldPlayer != null &&
+                        oldPlayer.Data.TryGetValue(key, out var oldVal) &&
+                        oldVal.Value == newValue)
                     {
-                        PlayerStateChanged?.Invoke(player, kvp.Key, kvp.Value.Value);
+                        Debug.Log("변화가 없다");
+                        continue; // 변화 없음
                     }
+
+                    // ✅ 변화된 상태 이벤트 발생
+                    PlayerStateChanged?.Invoke(player, key, newValue);
                 }
             }
         }
-    }
 
+        currentPlayers = ClonePlayers(currentLobby.Players);
+    }
+    
+    private List<Player> ClonePlayers(IList<Player> sourcePlayers)
+    {
+        List<Player> result = new List<Player>(sourcePlayers.Count);
+        foreach (var p in sourcePlayers)
+        {
+            result.Add(new Player(
+                id: p.Id,
+                data: p.Data?.ToDictionary(
+                    d => d.Key,
+                    d => new PlayerDataObject(
+                        visibility: d.Value.Visibility,
+                        value: d.Value.Value
+                    )
+                ),
+                connectionInfo: p.ConnectionInfo
+            ));
+        }
+        return result;
+    }
+    
     public void ResetEvents()
     {
         PlayerJoined = null;
