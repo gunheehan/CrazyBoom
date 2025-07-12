@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameRoomUIController : MonoBehaviour
 {
     [SerializeField] private PlayerListUI playerListUI;
+    [SerializeField] private GameReadyUI gameReadyUI;
 
     private List<IPresenter> presenters;
     
@@ -14,9 +15,13 @@ public class GameRoomUIController : MonoBehaviour
     {
         presenters = new List<IPresenter>();
 
-        var playerListModel = new PlayerListModel();
+        PlayerListModel playerListModel = new PlayerListModel();
         PlayerListPresenter playerListPresenter = new PlayerListPresenter(playerListUI, playerListModel);
         presenters.Add(playerListPresenter);
+
+        GameReadyModel gameReadyModel = new GameReadyModel();
+        GameReadyPresenter gameReadyPresenter = new GameReadyPresenter(gameReadyUI, gameReadyModel);
+        presenters.Add(gameReadyPresenter);
 
         foreach (var presenter in presenters)
         {
