@@ -7,6 +7,7 @@ public class PlayerListModel
 {
     public event Action<List<Player>> UpdateListUI;
     public event Action<Player> AddListUI;
+    public event Action<string, bool> ChangeReadyState;
     
     private List<Player> players;
 
@@ -20,5 +21,15 @@ public class PlayerListModel
     public void OnAddPlayer(Player player)
     {
         AddListUI?.Invoke(player);
+    }
+    
+    public void OnPlayerStateChanged(Player player, string key, string value)
+    {
+        if (key == "ready")
+        {
+            Debug.Log(value);
+            bool isReady = value == "true";
+            ChangeReadyState?.Invoke(player.Id, isReady);
+        }
     }
 }

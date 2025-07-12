@@ -11,7 +11,7 @@ public class GameReadyUI : MonoBehaviour
     
     void Start()
     {
-        readyToggle.onValueChanged.AddListener(OnChangeToggle);
+        readyToggle.onValueChanged.AddListener((ison)=>OnChangeToggle(ison));
     }
 
     public void UpdateReadyText(string text)

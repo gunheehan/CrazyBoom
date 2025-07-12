@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
@@ -8,16 +9,16 @@ public class PlayerListUI : MonoBehaviour
     [SerializeField] private Transform contents;
 
     private Stack<PlayerDataItem> itemStack = new Stack<PlayerDataItem>();
-    private List<PlayerDataItem> itemList = new List<PlayerDataItem>();
+    private Dictionary<string, PlayerDataItem> itemDic = new Dictionary<string, PlayerDataItem>();
 
     private void ClearList()
     {
-        foreach (PlayerDataItem item in itemList)
+        foreach (PlayerDataItem item in itemDic.Values)
         {
             item.Reset();
             itemStack.Push(item);
         }
-        itemList.Clear();
+        itemDic.Clear();
     }
     
     public void UpdateUI(List<Player> players)
@@ -34,6 +35,7 @@ public class PlayerListUI : MonoBehaviour
     
             Debug.Log($"플레이어 ID: {player.Id}, 닉네임: {nickname}");
             newItem.SetPlayerItem(nickname);
+            itemDic.Add(player.Id, newItem);
         }
     }
 
@@ -47,6 +49,18 @@ public class PlayerListUI : MonoBehaviour
     
         Debug.Log($"플레이어 ID: {player.Id}, 닉네임: {nickname}");
         newItem.SetPlayerItem(nickname);
+    }
+
+    public void UpdatePlayerState(string playerID, bool isReady)
+    {
+        if (itemDic.TryGetValue(playerID, out var item))
+        {
+            item.OnChangeReadyState(isReady);
+        }
+        else
+        {
+            Console.WriteLine("Not Found Player. Set Player Ready State");
+        }
     }
 
     private PlayerDataItem GetItem()
