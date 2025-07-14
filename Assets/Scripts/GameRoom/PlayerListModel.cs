@@ -13,7 +13,6 @@ public class PlayerListModel
 
     public void OnUpdatePlayerList(Lobby lobby)
     {
-        Debug.Log("PlayerList Model Update");
         players = lobby.Players;
         UpdateListUI?.Invoke(players);
     }
@@ -27,7 +26,6 @@ public class PlayerListModel
     {
         if (key == "ready")
         {
-            Debug.Log(value);
             bool isReady = value == "true";
             ChangeReadyState?.Invoke(player.Id, isReady);
         }

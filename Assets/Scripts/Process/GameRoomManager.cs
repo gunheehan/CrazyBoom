@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
@@ -67,33 +66,22 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
 
         if (changes.PlayerData.Changed)
         {
-            for (int i = 0; i < changes.PlayerData.Value.Count; i++)
+            foreach (var playerdata in changes.PlayerData.Value)
             {
-                LobbyPlayerChanges outData = null;
-                changes.PlayerData.Value.TryGetValue(i, out outData);
-                if(outData == null)
-                    continue;
-
-                var newPlayerData = outData.ChangedData;
-                Debug.Log(currentLobby.Players.Count);
-                var player = currentLobby.Players[changes.PlayerData.Value[i].PlayerIndex];
+                var newPlayerData = playerdata.Value.ChangedData;
+                var player = currentLobby.Players[playerdata.Key];
 
                 if (!newPlayerData.Changed) continue;
                 foreach (var kvp in newPlayerData.Value)
                 {
                     string key = kvp.Key;
                     string newValue = kvp.Value.Value.Value;
-
-                    Debug.Log(newValue);
-
+                    
                     var oldPlayer = currentPlayers?.Find(p => p.Id == player.Id);
                     if (oldPlayer != null &&
                         oldPlayer.Data.TryGetValue(key, out var oldVal) &&
                         oldVal.Value == newValue)
-                    {
-                        Debug.Log("변화가 없다");
                         continue;
-                    }
 
                     PlayerStateChanged?.Invoke(player, key, newValue);
                 }

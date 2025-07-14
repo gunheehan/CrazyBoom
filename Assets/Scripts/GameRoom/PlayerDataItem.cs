@@ -20,7 +20,6 @@ public class PlayerDataItem : MonoBehaviour
 
     public void OnChangeReadyState(bool isReady)
     {
-        Debug.Log("Player Ready State Change : " + isReady);
         readyStateToggle.isOn = isReady;
     }
 }
