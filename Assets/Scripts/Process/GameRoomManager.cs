@@ -69,11 +69,14 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
         {
             for (int i = 0; i < changes.PlayerData.Value.Count; i++)
             {
-                if(changes.PlayerData.Value[i] == null) continue;
+                LobbyPlayerChanges outData = null;
+                changes.PlayerData.Value.TryGetValue(i, out outData);
+                if(outData == null)
+                    continue;
 
-                var newPlayerData = changes.PlayerData.Value[i].ChangedData;
+                var newPlayerData = outData.ChangedData;
                 Debug.Log(currentLobby.Players.Count);
-                var player = currentLobby.Players[changes.PlayerData.Value[i].PlayerIndex]; // 동일 인덱스의 플레이어
+                var player = currentLobby.Players[changes.PlayerData.Value[i].PlayerIndex];
 
                 if (!newPlayerData.Changed) continue;
                 foreach (var kvp in newPlayerData.Value)
@@ -83,17 +86,15 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
 
                     Debug.Log(newValue);
 
-                    // 이전 상태가 있다면 비교
                     var oldPlayer = currentPlayers?.Find(p => p.Id == player.Id);
                     if (oldPlayer != null &&
                         oldPlayer.Data.TryGetValue(key, out var oldVal) &&
                         oldVal.Value == newValue)
                     {
                         Debug.Log("변화가 없다");
-                        continue; // 변화 없음
+                        continue;
                     }
 
-                    // ✅ 변화된 상태 이벤트 발생
                     PlayerStateChanged?.Invoke(player, key, newValue);
                 }
             }
