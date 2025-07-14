@@ -49,6 +49,7 @@ public class PlayerListUI : MonoBehaviour
     
         Debug.Log($"플레이어 ID: {player.Id}, 닉네임: {nickname}");
         newItem.SetPlayerItem(nickname);
+        itemDic.Add(player.Id, newItem);
     }
 
     public void UpdatePlayerState(string playerID, bool isReady)
