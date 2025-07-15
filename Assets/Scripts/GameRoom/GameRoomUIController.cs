@@ -1,11 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GameRoomUIController : MonoBehaviour
 {
     [SerializeField] private PlayerListUI playerListUI;
     [SerializeField] private GameReadyUI gameReadyUI;
+    [SerializeField] private ChatUI chatUI;
+    [SerializeField] private ChatServices chatServices;
 
     private List<IPresenter> presenters;
     
@@ -23,6 +24,12 @@ public class GameRoomUIController : MonoBehaviour
         GameReadyPresenter gameReadyPresenter = new GameReadyPresenter(gameReadyUI, gameReadyModel);
         presenters.Add(gameReadyPresenter);
 
+        ChatModel chatModel = new ChatModel();
+        ChatPresenter chatPresenter = new ChatPresenter(chatUI, chatModel);
+        chatPresenter.SetChatServices(chatServices);
+        chatServices.InitChatService(PlayerSession.Instance.CurrentLobby.Id, PlayerSession.Instance.PlayerName);
+        presenters.Add(chatPresenter);
+        
         foreach (var presenter in presenters)
         {
             presenter.Subscribe();
