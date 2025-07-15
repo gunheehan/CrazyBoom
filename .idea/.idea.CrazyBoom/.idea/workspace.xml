@@ -4,17 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="게임 준비 Ui 추가">
+    <list default="true" id="e75f7982-34ef-4aec-b8a7-219561293fff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CrazyBombChat/CrazyBombChat/Hubs/ChatHub.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CrazyBombChat/CrazyBombChat/Models/ChatMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CrazyBombChat/CrazyBombChat/Services/ChatManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CrazyBoom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRoom/GameReadyUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRoom/GameReadyUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerDataItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerDataItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerListModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerListModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerListPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerListPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerListUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameRoom/PlayerListUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Process/GameRoomManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Process/GameRoomManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/Build Profiles/New Linux Server Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Build Profiles/New Linux Server Profile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/Debug/net8.0/MatchmakingServer.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/MatchmakingServer.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/MatchmakingServer/MatchmakingServer/MatchmakingServer/obj/rider.project.restore.info" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -43,7 +46,6 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/gunhee/Documents/GitHub/CrazyBoom/Assets/Scenes/Game.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/API/RestAPI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Animation/AnimationController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationBehaviour/WalkBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
@@ -60,11 +62,18 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/Event/RoomListEventDispatcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Server/ServerBootstrap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/07305e3042f84027930ae6bc592d292b1df600/82/e8018fb4/SceneManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/37adeac6c47e42e38f60cdcff756f5c92cd10/f5/55b268e8/HubConnectionBuilder.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/58412b2e9bda42a8acc7556a3b7283fd56a0/5d/93b50884/HubConnectionBuilderHttpExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/c2/ba43f944/BindingFlags.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82571d7f5249456da89e34eb003220a7469400/31/73023fce/CancellationTokenSource.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82571d7f5249456da89e34eb003220a7469400/3c/0385b034/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/82571d7f5249456da89e34eb003220a7469400/4e/23eef297/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -74,26 +83,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.gitlab.GitLabSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.gitlab.GitLabSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/gunhee/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
-      "/Users/gunhee/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
-      "/Users/gunhee/Library/Application Support/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/gunhee/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/gunhee/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
+      &quot;/Users/gunhee/Library/Application Support/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.50f1/Unity.app/Contents/MacOS/Unity" />
@@ -121,10 +130,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="54541">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="54541" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -163,46 +172,8 @@
       <workItem from="1747931388751" duration="534000" />
       <workItem from="1748181751952" duration="3115000" />
       <workItem from="1748269383880" duration="655000" />
-    </task>
-    <task id="LOCAL-00007" summary="Player Power Speed 변경 베이스 로직 추가 및 스택 설정 로직 추가">
-      <option name="closed" value="true" />
-      <created>1741175419787</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1741175419787</updated>
-    </task>
-    <task id="LOCAL-00008" summary="PlayerMove 이벤트 구독용 메서드 추가">
-      <option name="closed" value="true" />
-      <created>1741175456940</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1741175456940</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Player Bomb 생성 로직 수정중">
-      <option name="closed" value="true" />
-      <created>1741176154847</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1741176154847</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Bomb Set 이벤트 UI Model 분리">
-      <option name="closed" value="true" />
-      <created>1741185640650</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1741185640650</updated>
-    </task>
-    <task id="LOCAL-00011" summary="joystick 불필요 상속 클래스 제거">
-      <option name="closed" value="true" />
-      <created>1741186179089</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1741186179089</updated>
+      <workItem from="1752504306152" duration="2879000" />
+      <workItem from="1752585037707" duration="577000" />
     </task>
     <task id="LOCAL-00012" summary="plane 생성구조 개편중">
       <option name="closed" value="true" />
@@ -556,7 +527,47 @@
       <option name="project" value="LOCAL" />
       <updated>1752294243296</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="빌드세팅 추가">
+      <option name="closed" value="true" />
+      <created>1752304115496</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1752304115496</updated>
+    </task>
+    <task id="LOCAL-00057" summary="빌드세팅 추가">
+      <option name="closed" value="true" />
+      <created>1752304129347</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1752304129347</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Player Ready State UI 추가 및 로직 연결(client 상태변경 오류 수정중)">
+      <option name="closed" value="true" />
+      <created>1752304192555</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1752304192555</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Player Data Change Index 이슈 수정(Data 변경 확인 필요)">
+      <option name="closed" value="true" />
+      <created>1752505098991</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1752505098992</updated>
+    </task>
+    <task id="LOCAL-00060" summary="Player Ready State Update 오류 수정 및 디버그용 로그 제거">
+      <option name="closed" value="true" />
+      <created>1752506953194</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1752506953194</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -583,10 +594,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="물폭탄 중복 데미지 연산 제거" />
-    <MESSAGE value="WaterBobm 물줄기 이펙트 적용중" />
-    <MESSAGE value="PlayerController arrow key 추가" />
-    <MESSAGE value="Animation Controller 추가" />
     <MESSAGE value="Demo Model 및 기본 animation anim 추가" />
     <MESSAGE value="Player 이동 로직 stateMachine으로 변경" />
     <MESSAGE value="아바타 이동중 쓰러지는 이슈 수정" />
@@ -608,7 +615,11 @@
     <MESSAGE value="누락 파일 업로드" />
     <MESSAGE value="로비 생성 및 접속 로직 추가" />
     <MESSAGE value="게임 준비 Ui 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="게임 준비 Ui 추가" />
+    <MESSAGE value="빌드세팅 추가" />
+    <MESSAGE value="Player Ready State UI 추가 및 로직 연결(client 상태변경 오류 수정중)" />
+    <MESSAGE value="Player Data Change Index 이슈 수정(Data 변경 확인 필요)" />
+    <MESSAGE value="Player Ready State Update 오류 수정 및 디버그용 로그 제거" />
+    <option name="LAST_COMMIT_MESSAGE" value="Player Ready State Update 오류 수정 및 디버그용 로그 제거" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
