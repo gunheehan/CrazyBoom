@@ -8,7 +8,7 @@ public class ChatServices : MonoBehaviour
 {
     private WebSocket websocket;
 
-    [SerializeField] private string serverUrl = "ws://127.0.0.1:5267/ws";
+    private string serverUrl = "ws://127.0.0.1:5267/ws";
     private string lobbyId;
     private string username;
 
@@ -30,7 +30,6 @@ public class ChatServices : MonoBehaviour
         {
             Debug.Log("✅ Connected to server");
 
-            // 서버에 입장 메시지 전송
             var joinMsg = new ChatMessage
             {
                 type = "join",
@@ -39,18 +38,6 @@ public class ChatServices : MonoBehaviour
                 content = ""
             };
             SendMessage(joinMsg);
-        };
-
-        websocket.OnMessage += (bytes) =>
-        {
-            var json = Encoding.UTF8.GetString(bytes);
-            var message = JsonUtility.FromJson<ChatMessage>(json);
-
-            if (message.type == "chat")
-            {
-                Debug.Log($"💬 [{message.user}] {message.content}");
-                OnChatReceived?.Invoke(message.user, message.content);
-            }
         };
 
         websocket.OnError += (e) =>
@@ -63,7 +50,15 @@ public class ChatServices : MonoBehaviour
             Debug.Log("🔌 Connection closed");
         };
 
-        await websocket.Connect();
+        try
+        {
+            Debug.Log($"📡 Connecting to: {serverUrl}");
+            await websocket.Connect();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"❌ Connect() Exception: {ex.Message}");
+        }
     }
 
     private void Update()
