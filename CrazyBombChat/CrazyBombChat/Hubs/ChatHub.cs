@@ -13,8 +13,8 @@ public class ChatHub : Hub
 
     public async Task SendMessage(ChatMessage message)
     {
-        await Clients.Group(message.LobbyId)
-            .SendAsync("ReceiveMessage", message.User, message.Content);
+        await Clients.Group(message.lobbyId)
+            .SendAsync("ReceiveMessage", message.user, message.content);
     }
 
     public async Task LeaveLobby(string lobbyId)

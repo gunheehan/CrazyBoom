@@ -27,6 +27,7 @@ public class ClientConnection
         while (_socket.State == WebSocketState.Open)
         {
             var result = await _socket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+
             if (result.MessageType == WebSocketMessageType.Close)
                 break;
 
@@ -35,12 +36,12 @@ public class ClientConnection
 
             if (msg == null) continue;
 
-            switch (msg.Type)
+            switch (msg.type)
             {
                 case "join":
-                    Username = msg.User;
-                    _chatManager.JoinLobby(msg.LobbyId, this);
-                    Console.WriteLine($"👤 {Username} joined {msg.LobbyId}");
+                    Username = msg.user;
+                    _chatManager.JoinLobby(msg.lobbyId, this);
+                    Console.WriteLine($"👤 {Username} joined {msg.lobbyId}");
                     break;
 
                 case "chat":
@@ -48,12 +49,12 @@ public class ClientConnection
                     {
                         string payload = JsonSerializer.Serialize(new ChatMessage
                         {
-                            Type = "chat",
-                            LobbyId = LobbyId,
-                            User = Username!,
-                            Content = msg.Content
+                            type = "chat",
+                            lobbyId = LobbyId,
+                            user = Username!,
+                            content = msg.content
                         });
-
+                        Console.WriteLine("SendMessage" + payload);
                         await _chatManager.BroadcastAsync(LobbyId, payload);
                     }
                     break;

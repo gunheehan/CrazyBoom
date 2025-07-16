@@ -28,8 +28,6 @@ public class ChatServices : MonoBehaviour
 
         websocket.OnOpen += () =>
         {
-            Debug.Log("✅ Connected to server");
-
             var joinMsg = new ChatMessage
             {
                 type = "join",
@@ -37,7 +35,31 @@ public class ChatServices : MonoBehaviour
                 user = username,
                 content = ""
             };
+            
             SendMessage(joinMsg);
+        };
+        
+        websocket.OnMessage += (bytes) =>
+        {
+            string json = Encoding.UTF8.GetString(bytes);
+
+            try
+            {
+                ChatMessage message = JsonUtility.FromJson<ChatMessage>(json);
+        
+                if (message.type == "chat")
+                {
+                    OnChatReceived?.Invoke(message.user, message.content);
+                }
+                else if (message.type == "system")
+                {
+                    Debug.Log($"📢 [SYSTEM]: {message.content}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"❌ Failed to parse message: {ex.Message}");
+            }
         };
 
         websocket.OnError += (e) =>
@@ -52,7 +74,6 @@ public class ChatServices : MonoBehaviour
 
         try
         {
-            Debug.Log($"📡 Connecting to: {serverUrl}");
             await websocket.Connect();
         }
         catch (Exception ex)
@@ -69,7 +90,10 @@ public class ChatServices : MonoBehaviour
     public async void SendChat(string content)
     {
         if (websocket == null || websocket.State != WebSocketState.Open)
+        {
+            Debug.LogError("websocket error");
             return;
+        }
 
         var msg = new ChatMessage
         {
@@ -84,8 +108,15 @@ public class ChatServices : MonoBehaviour
 
     private async void SendMessage(ChatMessage message)
     {
-        string json = JsonUtility.ToJson(message);
-        await websocket.SendText(json);
+        try
+        {
+            string json = JsonUtility.ToJson(message);
+            await websocket.SendText(json);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Send Message Error : " + ex.Message);
+        }
     }
 
     private async void OnApplicationQuit()

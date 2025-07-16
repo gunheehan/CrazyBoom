@@ -2,8 +2,8 @@ namespace CrazyBombChat.Models;
 
 public class ChatMessage
 {
-    public string Type { get; set; } = "";
-    public string LobbyId { get; set; } = "";
-    public string User { get; set; } = "";
-    public string Content { get; set; } = "";
+    public string type { get; set; } = "";
+    public string lobbyId { get; set; } = "";
+    public string user { get; set; } = "";
+    public string content { get; set; } = "";
 }
