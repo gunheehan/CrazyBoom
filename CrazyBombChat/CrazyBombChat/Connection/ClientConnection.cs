@@ -40,6 +40,7 @@ public class ClientConnection
             {
                 case "join":
                     Username = msg.user;
+                    LobbyId = msg.lobbyId;
                     _chatManager.JoinLobby(msg.lobbyId, this);
                     Console.WriteLine($"👤 {Username} joined {msg.lobbyId}");
                     break;
@@ -57,6 +58,12 @@ public class ClientConnection
                         Console.WriteLine("SendMessage" + payload);
                         await _chatManager.BroadcastAsync(LobbyId, payload);
                     }
+
+                    break;
+                case "leave":
+                    Username = msg.user;
+                    _chatManager.LeaveLobby(msg.lobbyId, this);
+                    Console.WriteLine($"👤 {Username} leave {msg.lobbyId}");
                     break;
             }
         }
