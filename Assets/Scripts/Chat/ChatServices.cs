@@ -21,7 +21,7 @@ public class ChatServices : MonoBehaviour
 
         ConnectToServer();
     }
-    
+
     private async Task ConnectToServer()
     {
         websocket = new WebSocket(serverUrl);
@@ -121,8 +121,21 @@ public class ChatServices : MonoBehaviour
 
     private async void OnApplicationQuit()
     {
-        if (websocket != null)
+        if (websocket != null && websocket.State == WebSocketState.Open)
+        {
+            var leaveMsg = new ChatMessage
+            {
+                type = "leave",
+                lobbyId = lobbyId,
+                user = username,
+                content = ""
+            };
+
+            await websocket.SendText(JsonUtility.ToJson(leaveMsg));
+            await Task.Delay(100);
+
             await websocket.Close();
+        }
     }
 
     [Serializable]
