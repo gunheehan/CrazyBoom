@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
@@ -45,8 +46,17 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
         currentLobby = lobby;
         listener = new GameEventListener();
         listener.OnLobbyChanged += HandleLobbyChanged;
+        ConnectNetwork();
 
         await listener.StartListening(lobby.Id);
+    }
+
+    private void ConnectNetwork()
+    {
+        if (PlayerSession.Instance.PlayerId == currentLobby.HostId)
+            NetworkManager.Singleton.StartHost();
+        else
+            NetworkManager.Singleton.StartClient();
     }
 
     private void HandleLobbyChanged(ILobbyChanges changes)

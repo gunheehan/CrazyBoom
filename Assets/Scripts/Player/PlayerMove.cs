@@ -34,10 +34,9 @@ public class PlayerMove : NetworkBehaviour
         joystick.UpdateMove -= OnUpdatePlayerDirection;
     }
 
-    private void OnUpdatePlayerDirection(Vector2 pos)
+    [ServerRpc(RequireOwnership = false)]
+    private void HandleMovementServerRpc(Vector2 pos)
     {
-        if (!IsOwner) return;
-        
         if (pos == Vector2.zero)
         {
             direction = Vector3.zero;
@@ -66,5 +65,12 @@ public class PlayerMove : NetworkBehaviour
         }
         
         OnChangeMoveInfo?.Invoke(direction, speed);
+    }
+
+    private void OnUpdatePlayerDirection(Vector2 pos)
+    {
+        if (!IsLocalPlayer) return;
+
+        HandleMovementServerRpc(pos);
     }
 }

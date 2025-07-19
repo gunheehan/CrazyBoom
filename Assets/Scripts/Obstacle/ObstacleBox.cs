@@ -1,8 +1,9 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class ObstacleBox : MonoBehaviour, IObstacle
+public class ObstacleBox : NetworkBehaviour, IObstacle
 {
     public event Action OnDestroyBox = null; 
     private int boxHP;
