@@ -1,7 +1,8 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerManager : MonoBehaviour, IPlayerBuff, IPlayer
+public class PlayerManager : NetworkBehaviour, IPlayerBuff, IPlayer
 {
     [SerializeField] private PlayerMove move;
     [SerializeField] private Animator animator;
@@ -18,6 +19,11 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff, IPlayer
         walkBehaviour = animator.GetBehaviour<WalkBehaviour>();
         animation = new AnimationController(animator);
         move.OnUpdateSpeed(stat.GetPlayerSpeed);
+    }
+
+    private void Start()
+    {
+        InitPlayer(new Vector3(1, 2, 1));
     }
 
     private void OnEnable()
@@ -62,7 +68,19 @@ public class PlayerManager : MonoBehaviour, IPlayerBuff, IPlayer
     {
         if (stat.GetPlayerBombCount < 1)
             return;
-        
+
+        if (!IsOwner)
+        {
+            Debug.Log("Not Owner");
+            return;
+        }
+
+        HandleCreateBombServerRpc();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void HandleCreateBombServerRpc()
+    {
         stat.UseBombStat(true);
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
