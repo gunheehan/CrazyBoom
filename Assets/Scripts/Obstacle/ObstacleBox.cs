@@ -10,7 +10,27 @@ public class ObstacleBox : NetworkBehaviour, IObstacle
 
     public void SetObstacleBox()
     {
-        boxHP = Random.Range(1, 3);
+        if (!IsServer)
+        {
+            Debug.Log("Not server");
+            return;
+        }
+        
+        if (!IsHost)
+        {
+            Debug.Log($"[{gameObject.name}] IsOwner: {IsOwner}, IsServer: {IsServer}, IsClient: {IsClient}, OwnerClientId: {OwnerClientId}, LocalClientId: {NetworkManager.Singleton.LocalClientId}");
+            Debug.Log("Obstacle Set Not Access");
+            return;
+        }
+        
+        int hp = Random.Range(1, 3);
+        HandleCreateObstacleServerRpc(hp);
+    }
+
+    [ServerRpc]
+    private void HandleCreateObstacleServerRpc(int hp)
+    {
+        boxHP = hp;
         gameObject.SetActive(true);
     }
 

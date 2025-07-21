@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PlaneManager : MonoBehaviour
@@ -73,6 +74,8 @@ public class PlaneManager : MonoBehaviour
     
     public void CreateObstacleBox()
     {
+        if (!NetworkManager.Singleton.IsServer) return;
+
         Renderer prefabRenderer = plane.GetComponent<Renderer>();
         float prefabSizeX = prefabRenderer.bounds.size.x;
         float prefabSizeZ = prefabRenderer.bounds.size.z;

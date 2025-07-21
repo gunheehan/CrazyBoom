@@ -69,17 +69,17 @@ public class PlayerManager : NetworkBehaviour, IPlayerBuff, IPlayer
         if (stat.GetPlayerBombCount < 1)
             return;
 
-        if (!IsOwner)
+        if (!IsLocalPlayer)
         {
-            Debug.Log("Not Owner");
+            Debug.Log("Not IsLocalPlayer");
             return;
         }
 
-        HandleCreateBombServerRpc();
+        HandleCreateBombClientRpc();
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void HandleCreateBombServerRpc()
+    [ClientRpc]
+    private void HandleCreateBombClientRpc()
     {
         stat.UseBombStat(true);
         RaycastHit hit;
