@@ -1,7 +1,8 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlaneParts : MonoBehaviour
+public class PlaneParts : NetworkBehaviour
 {
     [SerializeField] private ObstacleBox obstacleItem;
     [SerializeField] private WaterBomb bomb;
