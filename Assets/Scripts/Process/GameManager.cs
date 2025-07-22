@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-       // planeManager.OnCompletedPlaneSetting += OnCompletedPlane;
+       //planeManager.OnCompletedPlaneSetting += OnCompletedPlane;
     }
 
     private void OnDisable()
