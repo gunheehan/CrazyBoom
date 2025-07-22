@@ -1,6 +1,7 @@
 using System;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlaneParts : NetworkBehaviour
 {
@@ -34,8 +35,8 @@ public class PlaneParts : NetworkBehaviour
         bomb.SetBomb(power, OnExplodeCallback);
     }
 
-    public void SetObstacleBox()
+    private void SetObstacleBox()
     {
-        obstacleItem.SetObstacleBox();
+        obstacleItem.SetInitialHp(Random.Range(1, 3)); // Init 값 설정
     }
 }

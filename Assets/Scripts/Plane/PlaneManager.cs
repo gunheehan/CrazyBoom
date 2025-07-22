@@ -16,10 +16,25 @@ public class PlaneManager : MonoBehaviour
     private readonly int MAPSIZE = 10;
     private List<Vector2> playerPos;
     
-    private void Start()
+    private void Awake()
     {
         ignorefloorpos = new HashSet<Vector2Int>();
         playerPos = new List<Vector2>();
+    }
+
+    private void OnEnable()
+    {
+        GameRoomManager.Instance.OnStartGameProcess += OnSetPlane;
+    }
+
+    private void OnDisable()
+    {
+        GameRoomManager.Instance.OnStartGameProcess += OnSetPlane;
+    }
+
+    private void OnSetPlane(bool isconnect)
+    {
+        Debug.Log("Set Plane");
         AddEdgeIgnoreArea(0, 0);
         AddEdgeIgnoreArea(0, MAPSIZE - 3);
         AddEdgeIgnoreArea(MAPSIZE - 3, 0);

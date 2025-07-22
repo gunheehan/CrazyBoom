@@ -18,6 +18,7 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
     public event Action<string> PlayerLeft;
     public event Action<Player, string, string> PlayerStateChanged;
     public event Action<string> HostChanged;
+    public event Action<bool> OnStartGameProcess;
 
     private void Awake()
     {
@@ -53,10 +54,13 @@ public class GameRoomManager : MonoBehaviour, IGameRoomEventBroker
 
     private void ConnectNetwork()
     {
+        bool isconnect;
         if (PlayerSession.Instance.PlayerId == currentLobby.HostId)
-            NetworkManager.Singleton.StartHost();
+            isconnect = NetworkManager.Singleton.StartHost();
         else
-            NetworkManager.Singleton.StartClient();
+            isconnect = NetworkManager.Singleton.StartClient();
+        
+        OnStartGameProcess?.Invoke(isconnect);
     }
 
     private void HandleLobbyChanged(ILobbyChanges changes)
