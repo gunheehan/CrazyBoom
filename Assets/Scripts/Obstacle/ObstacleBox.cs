@@ -10,10 +10,10 @@ public class ObstacleBox : NetworkBehaviour, IObstacle
     
     public void SetInitialHp(int hp)
     {
+        gameObject.SetActive(true);
         if (!NetworkManager.Singleton.IsServer) return;
 
         boxHp.Value = hp;
-        gameObject.SetActive(true);
     }
 
     public void Damage()

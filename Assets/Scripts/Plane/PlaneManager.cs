@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlaneManager : MonoBehaviour
+public class PlaneManager : NetworkBehaviour
 {
     public event Action OnCompletedPlaneSetting = null;
     
@@ -18,6 +18,7 @@ public class PlaneManager : MonoBehaviour
     
     private void Awake()
     {
+        NetworkManager.Singleton.AddNetworkPrefab(plane.gameObject);
         ignorefloorpos = new HashSet<Vector2Int>();
         playerPos = new List<Vector2>();
     }
@@ -105,7 +106,10 @@ public class PlaneManager : MonoBehaviour
                     1,
                     -(z * prefabSizeZ)
                 );
-                PlaneParts obstacleObject = Instantiate(plane, obstacleContents.transform);
+
+                PlaneParts obstacleObject = NetworkManager.Instantiate(plane, obstacleContents.transform);
+                obstacleObject.GetComponent<NetworkObject>().Spawn();
+                obstacleObject.transform.SetParent(obstacleObject.transform);
                 obstacleObject.transform.SetAsLastSibling();
                 if (ignorefloorpos.Contains(initpos))
                     obstacleObject.SetPlane(position, false);
