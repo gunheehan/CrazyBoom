@@ -2487,6 +2487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6ea3aee26e24dbeb708851ac9194d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &1210555083
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,6 +3785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6ea3aee26e24dbeb708851ac9194d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!114 &1764005969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3897,6 +3899,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1835441496}
+  - component: {fileID: 1835441498}
   - component: {fileID: 1835441497}
   m_Layer: 0
   m_Name: Map
@@ -3936,10 +3939,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c5d1bf5560c49e992fb2fbc89d9323, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
   plane: {fileID: 3823422636107980567, guid: cac4d108d05594a71b2bdcd8fecc02b8, type: 3}
   obstacleContents: {fileID: 411884897}
   blockWall: {fileID: 2072512371}
   blockWallContents: {fileID: 2066608971}
+--- !u!114 &1835441498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835441492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 634876050
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1853209528
 GameObject:
   m_ObjectHideFlags: 0
