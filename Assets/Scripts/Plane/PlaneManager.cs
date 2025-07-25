@@ -110,7 +110,7 @@ public class PlaneManager : NetworkBehaviour
                 PlaneParts obstacleObject = NetworkManager.Instantiate(plane, obstacleContents.transform);
                 obstacleObject.GetComponent<NetworkObject>().Spawn();
                 obstacleObject.transform.SetParent(obstacleObject.transform);
-                obstacleObject.transform.SetAsLastSibling();
+                //obstacleObject.transform.SetAsLastSibling();
                 if (ignorefloorpos.Contains(initpos))
                     obstacleObject.SetPlane(position, false);
                 else

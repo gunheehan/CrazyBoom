@@ -1,7 +1,8 @@
 using System;
 using Unity.Netcode;
+using UnityEngine;
 
-public class ObstacleBox : NetworkBehaviour, IObstacle
+public class ObstacleBox : MonoBehaviour, IObstacle
 {
     public event Action OnDestroyBox = null; 
     private NetworkVariable<int> boxHp = new NetworkVariable<int>(
@@ -10,6 +11,7 @@ public class ObstacleBox : NetworkBehaviour, IObstacle
     
     public void SetInitialHp(int hp)
     {
+        Debug.Log("SetObstacleBox");
         gameObject.SetActive(true);
         if (!NetworkManager.Singleton.IsServer) return;
 
