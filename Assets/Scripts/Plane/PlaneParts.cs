@@ -24,6 +24,7 @@ public class PlaneParts : NetworkBehaviour
 
     public void SetPlane(Vector3 position, bool isneedObstacle)
     {
+        Debug.Log("Plane Obstacle State : " + isneedObstacle);
         gameObject.SetActive(true);
         gameObject.transform.position = position;
         if (isneedObstacle)
