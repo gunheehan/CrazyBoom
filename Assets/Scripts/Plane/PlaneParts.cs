@@ -30,10 +30,11 @@ public class PlaneParts : NetworkBehaviour
         if (isneedObstacle)
             SetObstacleBox();
     }
-
-    public void SetBomb(int power, Action OnExplodeCallback)
+    
+    [ServerRpc(RequireOwnership = false)]
+    public void SetBombServerRpc(int power, string playerID)
     {
-        bomb.SetBomb(power, OnExplodeCallback);
+        bomb.SetBomb(power, playerID);
     }
 
     private void SetObstacleBox()
