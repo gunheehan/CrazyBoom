@@ -34,7 +34,6 @@ public class PlaneManager : NetworkBehaviour
 
     private void OnSetPlane(bool isconnect)
     {
-        Debug.Log("Set Plane");
         AddEdgeIgnoreArea(0, 0);
         AddEdgeIgnoreArea(0, MAPSIZE - 3);
         AddEdgeIgnoreArea(MAPSIZE - 3, 0);
@@ -90,7 +89,7 @@ public class PlaneManager : NetworkBehaviour
     public void CreateObstacleBox()
     {
         if (!IsServer) return;
-Debug.Log("IsServer Plane Setting Start");
+
         Renderer prefabRenderer = plane.GetComponent<Renderer>();
         float prefabSizeX = prefabRenderer.bounds.size.x;
         float prefabSizeZ = prefabRenderer.bounds.size.z;
@@ -107,11 +106,12 @@ Debug.Log("IsServer Plane Setting Start");
                 );
 
                 PlaneParts obstacleObject = NetworkManager.Instantiate(plane, obstacleContents.transform);
-                //obstacleObject.transform.SetAsLastSibling();
+                obstacleObject.GetComponent<NetworkObject>().Spawn();
+
                 if (ignorefloorpos.Contains(initpos))
-                    obstacleObject.SetPlane(position, false);
+                    obstacleObject.Init(position, false);
                 else
-                    obstacleObject.SetPlane(position, true);
+                    obstacleObject.Init(position, true);
             }
         }
 
