@@ -12,12 +12,15 @@ public class PlayerManager : NetworkBehaviour, IPlayerBuff, IPlayer
     private AnimationController animation;
     private WalkBehaviour walkBehaviour;
 
+    private string playerid;
+
     void Awake()
     {
         stat = new PlayerStat();
         controller = new PlayerController();
         walkBehaviour = animator.GetBehaviour<WalkBehaviour>();
         animation = new AnimationController(animator);
+        playerid = PlayerSession.Instance.PlayerId;
         move.OnUpdateSpeed(stat.GetPlayerSpeed);
     }
 
@@ -75,18 +78,17 @@ public class PlayerManager : NetworkBehaviour, IPlayerBuff, IPlayer
             return;
         }
 
-        HandleCreateBombClientRpc();
+        HandleCreateBomb();
     }
 
-    [ClientRpc]
-    private void HandleCreateBombClientRpc()
+    private void HandleCreateBomb()
     {
         stat.UseBombStat(true);
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f))
         {
             PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
-            plane?.SetBomb(stat.GetPlayerPower, () => stat.UseBombStat(false));
+            plane?.SetBombServerRpc(stat.GetPlayerPower, playerid);
         }
     }
 

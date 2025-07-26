@@ -18,7 +18,6 @@ public class PlaneManager : NetworkBehaviour
     
     private void Awake()
     {
-        NetworkManager.Singleton.AddNetworkPrefab(plane.gameObject);
         ignorefloorpos = new HashSet<Vector2Int>();
         playerPos = new List<Vector2>();
     }
@@ -90,8 +89,8 @@ public class PlaneManager : NetworkBehaviour
     
     public void CreateObstacleBox()
     {
-        if (!NetworkManager.Singleton.IsServer) return;
-
+        if (!IsServer) return;
+Debug.Log("IsServer Plane Setting Start");
         Renderer prefabRenderer = plane.GetComponent<Renderer>();
         float prefabSizeX = prefabRenderer.bounds.size.x;
         float prefabSizeZ = prefabRenderer.bounds.size.z;
@@ -108,8 +107,6 @@ public class PlaneManager : NetworkBehaviour
                 );
 
                 PlaneParts obstacleObject = NetworkManager.Instantiate(plane, obstacleContents.transform);
-                obstacleObject.GetComponent<NetworkObject>().Spawn();
-                obstacleObject.transform.SetParent(obstacleObject.transform);
                 //obstacleObject.transform.SetAsLastSibling();
                 if (ignorefloorpos.Contains(initpos))
                     obstacleObject.SetPlane(position, false);

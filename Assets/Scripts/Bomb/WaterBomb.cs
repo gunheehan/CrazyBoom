@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
+using Unity.Netcode;
 using UnityEngine;
 
-public class WaterBomb : MonoBehaviour
+public class WaterBomb : NetworkBehaviour
 {
     public event Action<Vector3, Vector3> OnExplodeDirectionAction;
     [SerializeField] private Collider collider;
     
-    private Action OnExplodeAction;
-
     private int objIndex;
+    private string bombOwner;
     
     private int explosionRange = 1;
     private LayerMask obstacleLayer;
@@ -45,14 +45,14 @@ public class WaterBomb : MonoBehaviour
         }
     }
 
-    public void SetBomb(int power, Action OnExplode)
+    public void SetBomb(int power, string bombOwner)
     {
         if (isSet)
             return;
 
         isSet = false;
         collider.isTrigger = true;
-        OnExplodeAction = OnExplode;
+        bombOwner = bombOwner;
         gameObject.SetActive(true);
         explosionRange = power;
         StartCoroutine(WaitExplode());
@@ -72,7 +72,6 @@ public class WaterBomb : MonoBehaviour
         CheckDirection(Vector3.forward, origin, explosionRange);
         CheckDirection(Vector3.back, origin, explosionRange);
         
-        OnExplodeAction?.Invoke();
         BombReset();
     }
 
