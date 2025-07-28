@@ -1,4 +1,3 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -49,21 +48,26 @@ public class PlaneParts : NetworkBehaviour
         NetworkVariableWritePermission.Server
         );
 
+    private NetworkVariable<int> obstacleHP = new NetworkVariable<int>();
+
     public override void OnNetworkSpawn()
     {
-        Debug.Log("Network Spawn");
-        // 값이 동기화되었을 때 로컬에서 처리
         planePosition.OnValueChanged += (_, newValue) =>
         {
-            SetPlane(newValue, isActivated.Value);
+            SetPlane(newValue, isActivated.Value, obstacleHP.Value);
         };
 
         isActivated.OnValueChanged += (_, newValue) =>
         {
-            SetPlane(planePosition.Value, newValue);
+            SetPlane(planePosition.Value, newValue, obstacleHP.Value);
         };
 
-        SetPlane(planePosition.Value, isActivated.Value);
+        obstacleHP.OnValueChanged += (_, newValue) =>
+        {
+            SetPlane(planePosition.Value, isActivated.Value, newValue);
+        };
+
+        SetPlane(planePosition.Value, isActivated.Value, obstacleHP.Value);
     }
 
     public void Init(Vector3 pos, bool activateChild)
@@ -72,17 +76,16 @@ public class PlaneParts : NetworkBehaviour
 
         planePosition.Value = pos;
         isActivated.Value = activateChild;
+        obstacleHP.Value = Random.Range(1, 3);
     }
 
-    private void SetPlane(Vector3 pos, bool activateChild)
+    private void SetPlane(Vector3 pos, bool activateChild, int obstacleHP)
     {
-        Debug.Log("set Plane : " + activateChild);
-
         transform.localPosition = pos;
 
         if (activateChild)
         {
-            obstacleItem.SetInitialHp(Random.Range(1, 3)); // Init 값 설정
+            obstacleItem.SetInitialHp(obstacleHP);
             obstacleItem.gameObject.SetActive(true);
         }
     }
