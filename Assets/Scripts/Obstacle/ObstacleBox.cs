@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using UnityEngine;
 
 public class ObstacleBox : NetworkBehaviour, IObstacle
 {
