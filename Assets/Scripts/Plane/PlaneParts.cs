@@ -33,12 +33,13 @@ public class PlaneParts : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     public void SetBombServerRpc(int power, string playerID)
     {
-        bomb.SetBomb(power, playerID);
+        SetBombClientRpc(power, playerID);
     }
-
-    private void SetObstacleBox()
+    
+    [ClientRpc]
+    private void SetBombClientRpc(int power, string playerID)
     {
-        obstacleItem.SetInitialHp(Random.Range(1, 3)); // Init 값 설정
+        bomb.SetBomb(power, playerID);
     }
     
     private NetworkVariable<Vector3> planePosition = new NetworkVariable<Vector3>();
