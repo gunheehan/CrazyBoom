@@ -12,9 +12,8 @@ public enum BuffItemType
 public class BuffItem : MonoBehaviour, IBuff
 {
     [SerializeField] private BuffItemType itemType;
-    public void SetBuffItem()
+    public void SetBuffItem(int typeIndex)
     {
-        int typeIndex = Random.Range(0, 8);
         if(typeIndex >= (int)BuffItemType.None)
             return;
         
