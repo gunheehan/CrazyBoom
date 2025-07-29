@@ -9,26 +9,69 @@ public class PlaneParts : NetworkBehaviour
     [SerializeField] private BuffItem buffItem;
     [SerializeField] private ParticleController particleController;
 
+    private NetworkVariable<Vector3> planePosition = new NetworkVariable<Vector3>();
+    private NetworkVariable<int> obstacleHP = new NetworkVariable<int>();
+    private NetworkVariable<int> buffItemIndex = new NetworkVariable<int>();
+    
     private void OnEnable()
     {
-        obstacleItem.OnDestroyBox += buffItem.SetBuffItem;
+        obstacleItem.OnDestroyBox += SetBuffItem;
         bomb.OnExplodeDirectionAction += particleController.CreateBombParticle;
     }
 
     private void OnDisable()
     {
-        obstacleItem.OnDestroyBox -= buffItem.SetBuffItem;
+        obstacleItem.OnDestroyBox -= SetBuffItem;
         bomb.OnExplodeDirectionAction -= particleController.CreateBombParticle;
     }
 
-    // public void SetPlane(Vector3 position, bool isneedObstacle)
-    // {
-    //     Debug.Log("Plane Obstacle State : " + isneedObstacle);
-    //     gameObject.SetActive(true);
-    //     gameObject.transform.position = position;
-    //     if (isneedObstacle)
-    //         SetObstacleBox();
-    // }
+    public override void OnNetworkSpawn()
+    {
+        SetPosition(planePosition.Value);
+        SetObstacleObject(obstacleHP.Value);
+
+        planePosition.OnValueChanged += (_, newValue) =>
+        {
+            SetPosition(newValue);
+        };
+
+        obstacleHP.OnValueChanged += (_, newValue) =>
+        {
+            SetObstacleObject(newValue);
+        };
+    }
+
+    public void Init(Vector3 pos, bool activateChild)
+    {
+        if (!IsServer) return;
+
+        planePosition.Value = pos;
+
+        if (activateChild)
+        {
+            obstacleHP.Value = Random.Range(1, 3);
+            buffItemIndex.Value = Random.Range(0, 8);
+        }
+    }
+
+    private void SetPosition(Vector3 pos)
+    {
+        transform.localPosition = pos;
+    }
+
+    private void SetObstacleObject(int hp)
+    {
+        if (hp < 1)
+            return;
+        
+        obstacleItem.SetInitialHp(hp);
+        obstacleItem.gameObject.SetActive(true);
+    }
+
+    private void SetBuffItem()
+    {
+        buffItem.SetBuffItem(buffItemIndex.Value);
+    }
     
     [ServerRpc(RequireOwnership = false)]
     public void SetBombServerRpc(int power, string playerID)
@@ -40,54 +83,5 @@ public class PlaneParts : NetworkBehaviour
     private void SetBombClientRpc(int power, string playerID)
     {
         bomb.SetBomb(power, playerID);
-    }
-    
-    private NetworkVariable<Vector3> planePosition = new NetworkVariable<Vector3>();
-    private NetworkVariable<bool> isActivated = new NetworkVariable<bool>(
-        false,
-        NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Server
-        );
-
-    private NetworkVariable<int> obstacleHP = new NetworkVariable<int>();
-
-    public override void OnNetworkSpawn()
-    {
-        planePosition.OnValueChanged += (_, newValue) =>
-        {
-            SetPlane(newValue, isActivated.Value, obstacleHP.Value);
-        };
-
-        isActivated.OnValueChanged += (_, newValue) =>
-        {
-            SetPlane(planePosition.Value, newValue, obstacleHP.Value);
-        };
-
-        obstacleHP.OnValueChanged += (_, newValue) =>
-        {
-            SetPlane(planePosition.Value, isActivated.Value, newValue);
-        };
-
-        SetPlane(planePosition.Value, isActivated.Value, obstacleHP.Value);
-    }
-
-    public void Init(Vector3 pos, bool activateChild)
-    {
-        if (!IsServer) return;
-
-        planePosition.Value = pos;
-        isActivated.Value = activateChild;
-        obstacleHP.Value = Random.Range(1, 3);
-    }
-
-    private void SetPlane(Vector3 pos, bool activateChild, int obstacleHP)
-    {
-        transform.localPosition = pos;
-
-        if (activateChild)
-        {
-            obstacleItem.SetInitialHp(obstacleHP);
-            obstacleItem.gameObject.SetActive(true);
-        }
     }
 }
