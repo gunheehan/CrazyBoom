@@ -6,6 +6,7 @@ using UnityEngine;
 public class WaterBomb : NetworkBehaviour
 {
     public event Action<Vector3, Vector3> OnExplodeDirectionAction;
+    public event Action<string> ExplodeBomb;
     [SerializeField] private Collider collider;
     
     private int objIndex;
@@ -20,6 +21,7 @@ public class WaterBomb : NetworkBehaviour
     private Collider playerCollider;
 
     private bool isSet = false;
+    public bool IsSet => isSet;
     private bool explode = false;
     
     private void Start()
@@ -45,14 +47,14 @@ public class WaterBomb : NetworkBehaviour
         }
     }
 
-    public void SetBomb(int power, string bombOwner)
+    public void SetBomb(int power, string bombowner)
     {
         if (isSet)
             return;
 
         isSet = false;
         collider.isTrigger = true;
-        bombOwner = bombOwner;
+        bombOwner = bombowner;
         gameObject.SetActive(true);
         explosionRange = power;
         StartCoroutine(WaitExplode());
@@ -72,6 +74,7 @@ public class WaterBomb : NetworkBehaviour
         CheckDirection(Vector3.forward, origin, explosionRange);
         CheckDirection(Vector3.back, origin, explosionRange);
         
+        ExplodeBomb?.Invoke(bombOwner);
         BombReset();
     }
 
@@ -87,6 +90,7 @@ public class WaterBomb : NetworkBehaviour
     {
         isSet = false;
         explode = false;
+        bombOwner = string.Empty;
         gameObject.SetActive(false);
     }
 

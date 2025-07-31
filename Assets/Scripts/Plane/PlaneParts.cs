@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,17 +13,20 @@ public class PlaneParts : NetworkBehaviour
     private NetworkVariable<Vector3> planePosition = new NetworkVariable<Vector3>();
     private NetworkVariable<int> obstacleHP = new NetworkVariable<int>();
     private NetworkVariable<int> buffItemIndex = new NetworkVariable<int>();
-    
+
+    public Action<string> explodeBomb;
     private void OnEnable()
     {
         obstacleItem.OnDestroyBox += SetBuffItem;
         bomb.OnExplodeDirectionAction += particleController.CreateBombParticle;
+        bomb.ExplodeBomb += OnExplodeBomb;
     }
 
     private void OnDisable()
     {
         obstacleItem.OnDestroyBox -= SetBuffItem;
         bomb.OnExplodeDirectionAction -= particleController.CreateBombParticle;
+        bomb.ExplodeBomb -= OnExplodeBomb;
     }
 
     public override void OnNetworkSpawn()
@@ -72,10 +76,19 @@ public class PlaneParts : NetworkBehaviour
     {
         buffItem.SetBuffItem(buffItemIndex.Value);
     }
+
+    private void OnExplodeBomb(string owner)
+    {
+        explodeBomb?.Invoke(owner);
+        explodeBomb = null;
+    }
     
     [ServerRpc(RequireOwnership = false)]
     public void SetBombServerRpc(int power, string playerID)
     {
+        if (bomb.IsSet)
+            return;
+
         SetBombClientRpc(power, playerID);
     }
     

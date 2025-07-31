@@ -89,7 +89,14 @@ public class PlayerManager : NetworkBehaviour, IPlayerBuff, IPlayer
         {
             PlaneParts plane = hit.collider.gameObject.GetComponent<PlaneParts>();
             plane?.SetBombServerRpc(stat.GetPlayerPower, playerid);
+            plane.explodeBomb = OnExplodeBomb;
         }
+    }
+
+    private void OnExplodeBomb(string owner)
+    {
+        if(owner.Equals(playerid))
+            stat.UseBombStat(false);
     }
 
     public void TakeDamage()
